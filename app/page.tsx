@@ -95,7 +95,7 @@ export default function Home() {
       
 
     {/* Hero Section */}
-    <section className="relative px-6 py-25 md:py-40 overflow-hidden flex flex-col items-center justify-center text-center min-h-screen w-full bg-[#08080A]">
+    <section className="relative px-6 py-24 md:py-40 overflow-hidden flex flex-col items-center justify-center text-center min-h-screen w-full bg-[#08080A]">
       {/* Background Media */}
       <div className="absolute inset-0 z-0">
         <Image

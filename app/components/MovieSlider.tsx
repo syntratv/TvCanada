@@ -7,34 +7,95 @@ import { useState, useMemo } from 'react';
 // ---------------------------------------------------------------------------
 // IMAGE COUNTS — matched to actual files in /public/img/sliders/
 // ---------------------------------------------------------------------------
-const MOVIES_COUNT = 16;   // 16 movie images
-const SERIES_COUNT = 16;   // 16 series images
-const SPORTS_COUNT = 14;   // 14 sports images
+const MOVIES_COUNT = 16;
+const SERIES_COUNT = 16;
+const SPORTS_COUNT = 14;
 
-// Movies array
+// ---------------------------------------------------------------------------
+// UNIQUE TITLES — one per image, so every alt text is 100% unique
+// ---------------------------------------------------------------------------
+const MOVIE_TITLES = [
+  'Latest Action Blockbuster',
+  'Top-Rated Drama Film',
+  '4K Sci-Fi Cinema Release',
+  'Award-Winning Thriller',
+  'Family Adventure Movie',
+  'Epic Fantasy Feature',
+  'Bestselling Comedy Film',
+  'Classic Cinema Remaster',
+  'International Box Office Hit',
+  'Superhero Movie Premiere',
+  'Suspense Mystery Film',
+  'Hollywood Romance Release',
+  'Historical War Drama',
+  'Animated Feature Film',
+  'Crime Documentary Feature',
+  'Independent Cinema Pick',
+];
+
+const SERIES_TITLES = [
+  'Trending Drama Series',
+  'Binge-Worthy Crime Show',
+  'Award-Winning TV Series',
+  'Sci-Fi Streaming Series',
+  'Comedy Sitcom Boxset',
+  'Popular Fantasy Series',
+  'Reality TV Show Collection',
+  'Mystery Thriller Series',
+  'Historical Period Drama',
+  'Medical Drama Series',
+  'Animated Series for Adults',
+  'Romantic Drama Boxset',
+  'Political Thriller Show',
+  'Superhero TV Series',
+  'Documentary Series Collection',
+  'International Streaming Series',
+];
+
+const SPORTS_TITLES = [
+  'Live NHL Hockey Game',
+  'NBA Basketball Broadcast',
+  'Premier League Soccer Match',
+  'UFC Pay-Per-View Event',
+  'Formula 1 Race Broadcast',
+  'MLB Baseball Live Game',
+  'NFL Football Live Stream',
+  'Tennis Grand Slam Match',
+  'PSL Cricket Live Match',
+  'Boxing Championship Fight',
+  'CFL Canadian Football Game',
+  'Golf PGA Tour Live',
+  'Rugby International Match',
+  'MLS Soccer Live Broadcast',
+];
+
+// ---------------------------------------------------------------------------
+// DATA ARRAYS — each item now carries a unique `alt` field
+// ---------------------------------------------------------------------------
 const movies = Array.from({ length: MOVIES_COUNT }).map((_, i) => {
   const number = String(i + 1).padStart(2, '0');
   return {
     id: `movie-${i}`,
     imagePath: `/img/sliders/movies/iptv-canada-movies-${number}`,
+    alt: `${MOVIE_TITLES[i]} streaming on IPTV Canada in 4K Ultra HD`,
   };
 });
 
-// Series array
 const series = Array.from({ length: SERIES_COUNT }).map((_, i) => {
   const number = String(i + 1).padStart(2, '0');
   return {
     id: `series-${i}`,
     imagePath: `/img/sliders/series/iptv-canada-serie-${number}`,
+    alt: `${SERIES_TITLES[i]} available on IPTV Canada VOD library`,
   };
 });
 
-// Sports array
 const sports = Array.from({ length: SPORTS_COUNT }).map((_, i) => {
   const number = String(i + 1).padStart(2, '0');
   return {
     id: `sport-${i}`,
     imagePath: `/img/sliders/sports/iptv-canada-sports-${number}`,
+    alt: `${SPORTS_TITLES[i]} streaming live on IPTV Canada in 60FPS`,
   };
 });
 
@@ -46,7 +107,7 @@ const scrollToPricing = () => {
 };
 
 // ---------------------------------------------------------------------------
-// INFINITE SLIDER — eager loading to prevent blanks
+// INFINITE SLIDER
 // ---------------------------------------------------------------------------
 const InfiniteSlider = ({
   items,
@@ -67,7 +128,7 @@ const InfiniteSlider = ({
 
   return (
     <div className="relative w-full overflow-hidden py-3" aria-hidden="true">
-      {/* Side Fades — match row background */}
+      {/* Side Fades */}
       <div
         className="absolute left-0 top-0 bottom-0 w-20 md:w-36 z-10 pointer-events-none"
         style={{ background: `linear-gradient(to right, ${fadeBgColor}, transparent)` }}
@@ -85,8 +146,12 @@ const InfiniteSlider = ({
         {infiniteItems.map((item, idx) => {
           const key = `${item.id}-${idx}`;
           const isFirstHalf = idx < items.length;
-          // First few visible images load with higher priority
           const isPriority = isFirstHalf && idx < 6;
+
+          // The duplicated half (second loop) should not repeat alt text
+          // to avoid Google flagging it as duplicated alt spam.
+          const isDuplicate = idx >= items.length;
+          const altText = isDuplicate ? '' : item.alt;
 
           return (
             <button
@@ -100,13 +165,12 @@ const InfiniteSlider = ({
                 {!failedImages[key] ? (
                   <Image
                     src={`${item.imagePath}.webp`}
-                    alt=""
+                    alt={altText}
                     width={208}
                     height={312}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="eager"
                     priority={isPriority}
-                    aria-hidden="true"
                     sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, (max-width: 1024px) 192px, 208px"
                     onError={() =>
                       setFailedImages((prev) => ({ ...prev, [key]: true }))
@@ -134,7 +198,7 @@ const InfiniteSlider = ({
 export default function MovieSlider() {
   return (
     <section className="w-full" aria-label="Media catalog overview">
-      {/* ROW 1: RED BAND (Movies — 16 images) */}
+      {/* ROW 1: Movies */}
       <div className="w-full py-12 sm:py-16 bg-[#9A0007]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
           <div className="flex items-center gap-3">
@@ -158,7 +222,7 @@ export default function MovieSlider() {
         />
       </div>
 
-      {/* ROW 2: WHITE BAND (Series — 16 images) */}
+      {/* ROW 2: Series */}
       <div className="w-full py-12 sm:py-16 bg-[#f2ebeb]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
           <div className="flex items-center gap-3">
@@ -182,7 +246,7 @@ export default function MovieSlider() {
         />
       </div>
 
-      {/* ROW 3: RED BAND (Sports — 14 images) */}
+      {/* ROW 3: Sports */}
       <div className="w-full py-12 sm:py-16 bg-[#9A0007]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
           <div className="flex items-center gap-3">

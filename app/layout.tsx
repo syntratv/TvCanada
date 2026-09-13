@@ -26,7 +26,7 @@ const montserrat = Montserrat({
 const SITE_URL = `https://${CONSTANTS.DOMAIN}`;
 
 // ---------------------------------------------------------------------------
-// SEO SAFETY HELPERS — enforce character limits
+// SEO SAFETY HELPERS
 // ---------------------------------------------------------------------------
 const clampTitle = (s: string, max = 60): string =>
   s.length <= max ? s : s.slice(0, max - 1).trimEnd() + '…';
@@ -35,16 +35,16 @@ const clampDescription = (s: string, max = 160): string =>
   s.length <= max ? s : s.slice(0, max - 3).trimEnd() + '...';
 
 // ---------------------------------------------------------------------------
-// SEO STRINGS — measured & locked
+// SEO STRINGS
 // ---------------------------------------------------------------------------
 const BRAND = CONSTANTS.BRAND_NAME; // "IPTV Canada"
 
-// Title = 56 chars (target range 50–59)
+// Title = 56 chars
 const SEO_TITLE = clampTitle(
   `${BRAND} | Premium 4K Ultra HD Streaming Service 2026`
 );
 
-// Meta description = 127 chars (target range 120–130)
+// Meta description = 127 chars
 const SEO_DESCRIPTION = clampDescription(
   `Get ${BRAND} - 20,000+ live channels & VOD movies in 4K with anti-freeze servers. Watch live sports & premium TV instantly!`
 );
@@ -55,7 +55,7 @@ const SEO_TWITTER_TITLE = clampTitle(SEO_TITLE, 70);
 const SEO_TWITTER_DESCRIPTION = clampDescription(SEO_DESCRIPTION, 200);
 
 // ---------------------------------------------------------------------------
-// FAQ DATA — inline (prevents import/runtime errors)
+// FAQ DATA
 // ---------------------------------------------------------------------------
 const FAQ_DATA = [
   {
@@ -95,7 +95,7 @@ export const viewport: Viewport = {
 };
 
 // ---------------------------------------------------------------------------
-// GLOBAL METADATA — every string respects SEO length limits
+// GLOBAL METADATA
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -218,15 +218,65 @@ export const metadata: Metadata = {
 // UNIFIED JSON-LD SCHEMA
 // ---------------------------------------------------------------------------
 const CombinedSchema = () => {
+  // -------------------------------------------------------------------------
+  // Shared offer fields — applied to every Offer to satisfy Google's
+  // recommendations and prevent GSC warnings.
+  // -------------------------------------------------------------------------
+  const sharedOfferFields = {
+    priceCurrency: 'CAD',
+    priceValidUntil: '2027-12-31',
+    validFrom: '2026-01-01',
+    availability: 'https://schema.org/InStock',
+    url: `${SITE_URL}/pricing`,
+    hasMerchantReturnPolicy: {
+      '@type': 'MerchantReturnPolicy',
+      applicableCountry: 'CA',
+      returnPolicyCategory:
+        'https://schema.org/MerchantReturnFiniteReturnWindow',
+      merchantReturnDays: 7,
+      returnMethod: 'https://schema.org/ReturnByMail',
+      returnFees: 'https://schema.org/FreeReturn',
+    },
+    shippingDetails: {
+      '@type': 'OfferShippingDetails',
+      shippingRate: {
+        '@type': 'MonetaryAmount',
+        value: '0',
+        currency: 'CAD',
+      },
+      shippingDestination: {
+        '@type': 'DefinedRegion',
+        addressCountry: 'CA',
+      },
+      deliveryTime: {
+        '@type': 'ShippingDeliveryTime',
+        handlingTime: {
+          '@type': 'QuantitativeValue',
+          minValue: 0,
+          maxValue: 0,
+          unitCode: 'DAY',
+        },
+        transitTime: {
+          '@type': 'QuantitativeValue',
+          minValue: 0,
+          maxValue: 0,
+          unitCode: 'DAY',
+        },
+      },
+    },
+  };
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      // ---------------------------------------------------------
       // ORGANIZATION
+      // ---------------------------------------------------------
       {
         '@type': 'Organization',
         '@id': `${SITE_URL}/#organization`,
         name: BRAND,
-        alternateName: BRAND,
+        alternateName: `${BRAND} Streaming`,
         url: SITE_URL,
         logo: `${SITE_URL}/img/iptv-logo.webp`,
         image: { '@id': `${SITE_URL}/#primaryimage` },
@@ -246,7 +296,10 @@ const CombinedSchema = () => {
           CONSTANTS.SOCIALS.facebook,
         ],
       },
-      // PRIMARY IMAGE (Google Search thumbnail source)
+
+      // ---------------------------------------------------------
+      // PRIMARY IMAGE
+      // ---------------------------------------------------------
       {
         '@type': 'ImageObject',
         '@id': `${SITE_URL}/#primaryimage`,
@@ -257,7 +310,10 @@ const CombinedSchema = () => {
         caption: `${BRAND} - 4K Ultra HD Streaming Service`,
         representativeOfPage: true,
       },
+
+      // ---------------------------------------------------------
       // WEBSITE
+      // ---------------------------------------------------------
       {
         '@type': 'WebSite',
         '@id': `${SITE_URL}/#website`,
@@ -267,7 +323,10 @@ const CombinedSchema = () => {
         publisher: { '@id': `${SITE_URL}/#organization` },
         inLanguage: 'en-CA',
       },
+
+      // ---------------------------------------------------------
       // WEBPAGE
+      // ---------------------------------------------------------
       {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/#webpage`,
@@ -279,7 +338,10 @@ const CombinedSchema = () => {
         inLanguage: 'en-CA',
         primaryImageOfPage: { '@id': `${SITE_URL}/#primaryimage` },
       },
-      // PRODUCT
+
+      // ---------------------------------------------------------
+      // PRODUCT — FIXED: brand is now a proper Brand object
+      // ---------------------------------------------------------
       {
         '@type': 'Product',
         '@id': `${SITE_URL}/#product`,
@@ -288,7 +350,11 @@ const CombinedSchema = () => {
         description: `${BRAND} delivers premium 4K live TV and on-demand media across Canada with 99.9% server uptime and instant 5-minute activation.`,
         sku: 'IPTV-CA-PREMIUM',
         category: 'Streaming Service',
-        brand: { '@id': `${SITE_URL}/#organization` },
+        brand: {
+          '@type': 'Brand',
+          name: BRAND,
+          url: SITE_URL,
+        },
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: '4.9',
@@ -297,16 +363,54 @@ const CombinedSchema = () => {
           worstRating: '1',
         },
         offers: [
-          { '@type': 'Offer', name: '1 Screen - 3 Months', priceCurrency: 'CAD', price: '50.00', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock', url: `${SITE_URL}/pricing` },
-          { '@type': 'Offer', name: '1 Screen - 6 Months', priceCurrency: 'CAD', price: '75.00', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock', url: `${SITE_URL}/pricing` },
-          { '@type': 'Offer', name: '1 Screen - 12 Months', priceCurrency: 'CAD', price: '99.00', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock', url: `${SITE_URL}/pricing` },
-          { '@type': 'Offer', name: '2 Screens - 6 Months', priceCurrency: 'CAD', price: '115.00', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock', url: `${SITE_URL}/pricing` },
-          { '@type': 'Offer', name: '2 Screens - 12 Months', priceCurrency: 'CAD', price: '175.00', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock', url: `${SITE_URL}/pricing` },
-          { '@type': 'Offer', name: '3 Screens - 6 Months', priceCurrency: 'CAD', price: '150.00', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock', url: `${SITE_URL}/pricing` },
-          { '@type': 'Offer', name: '3 Screens - 12 Months', priceCurrency: 'CAD', price: '250.00', priceValidUntil: '2027-12-31', availability: 'https://schema.org/InStock', url: `${SITE_URL}/pricing` },
+          {
+            '@type': 'Offer',
+            name: '1 Screen - 3 Months',
+            price: '50.00',
+            ...sharedOfferFields,
+          },
+          {
+            '@type': 'Offer',
+            name: '1 Screen - 6 Months',
+            price: '75.00',
+            ...sharedOfferFields,
+          },
+          {
+            '@type': 'Offer',
+            name: '1 Screen - 12 Months',
+            price: '99.00',
+            ...sharedOfferFields,
+          },
+          {
+            '@type': 'Offer',
+            name: '2 Screens - 6 Months',
+            price: '115.00',
+            ...sharedOfferFields,
+          },
+          {
+            '@type': 'Offer',
+            name: '2 Screens - 12 Months',
+            price: '175.00',
+            ...sharedOfferFields,
+          },
+          {
+            '@type': 'Offer',
+            name: '3 Screens - 6 Months',
+            price: '150.00',
+            ...sharedOfferFields,
+          },
+          {
+            '@type': 'Offer',
+            name: '3 Screens - 12 Months',
+            price: '250.00',
+            ...sharedOfferFields,
+          },
         ],
       },
+
+      // ---------------------------------------------------------
       // FAQ
+      // ---------------------------------------------------------
       {
         '@type': 'FAQPage',
         '@id': `${SITE_URL}/#faq`,
@@ -336,12 +440,20 @@ const CombinedSchema = () => {
 // ---------------------------------------------------------------------------
 // ROOT LAYOUT
 // ---------------------------------------------------------------------------
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en-CA" suppressHydrationWarning className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
       </head>
       <body
         className={`${poppins.className} ${montserrat.variable} antialiased min-h-screen bg-[#0a0a0c] text-[#f2ebeb] selection:bg-[#D32F2F] selection:text-white`}

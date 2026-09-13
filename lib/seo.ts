@@ -54,7 +54,7 @@ export const CONSTANTS = {
     email: 'support@theiptvcanada.com',
     phone: '+1 613 555 0199', // ⚠️ Replace with your real Canadian number
     whatsapp: '+1 613 555 0199', // ⚠️ Replace with your real WhatsApp number
-    whatsappUrl: 'https://wa.me/16135550199', // ⚠️ Replace with your real wa.me link
+    whatsappUrl: 'https://live-support.netlify.app', // ⚠️ Replace with your real wa.me link
     supportHours: '24/7 Canadian Customer Support via Email and Ticket System',
   },
 

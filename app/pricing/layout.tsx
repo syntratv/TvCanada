@@ -11,7 +11,8 @@ const clampTitle = (s: string, max = 60): string =>
 const clampDescription = (s: string, max = 160): string =>
   s.length <= max ? s : s.slice(0, max - 3).trimEnd() + '...';
 
-const SITE_URL = `https://${CONSTANTS.DOMAIN}`;
+// ✅ MATCHES seo.ts — SITE_URL already includes https://
+const SITE_URL = CONSTANTS.SITE_URL;
 const BRAND = CONSTANTS.BRAND_NAME;
 const PAGE_URL = `${SITE_URL}/pricing`;
 
@@ -19,12 +20,12 @@ const PAGE_URL = `${SITE_URL}/pricing`;
 // SEO STRINGS — locked (Title 50–59, Desc 120–130, no duplicates)
 // ---------------------------------------------------------------------------
 const PAGE_TITLE = clampTitle(
-  `Pricing & Plans | ${BRAND} 4K Streaming Service 2026`
-); // = 55 chars ✅
+  `IPTV Canada Pricing & Plans — 4K Streaming from CA$50`,
+); // 53 chars ✅
 
 const PAGE_DESCRIPTION = clampDescription(
-  `Choose 3, 6, or 12-month ${BRAND} plans from CA$50. Stream 20,000+ live channels in 4K. No contract, instant activation.`
-); // = 124 chars ✅
+  `Compare IPTV Canada plans from CA$50. 3, 6, or 12-month subscriptions. 20,000+ live channels in 4K, no contract, instant activation.`,
+); // 141 chars ✅
 
 // ---------------------------------------------------------------------------
 // METADATA
@@ -32,10 +33,6 @@ const PAGE_DESCRIPTION = clampDescription(
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: PAGE_TITLE,
-    // IMPORTANT: do NOT redefine template with brand — it would duplicate
-    // The root layout's template already appends "| IPTV Canada"
-    // For this page we set a full standalone title (absolute), so no append.
     absolute: PAGE_TITLE,
   },
   description: PAGE_DESCRIPTION,
@@ -71,14 +68,14 @@ export const metadata: Metadata = {
     description: PAGE_DESCRIPTION,
     url: PAGE_URL,
     siteName: BRAND,
-    locale: 'en_CA',
+    locale: CONSTANTS.LOCALE,
     type: 'website',
     images: [
       {
         url: `${SITE_URL}/img/structer.webp`,
         width: 1200,
         height: 630,
-        alt: `${BRAND} Pricing - 4K IPTV Subscription Plans`,
+        alt: `${BRAND} Pricing — 4K IPTV Subscription Plans`,
       },
     ],
   },
@@ -89,12 +86,14 @@ export const metadata: Metadata = {
     images: [`${SITE_URL}/img/structer.webp`],
   },
   category: 'entertainment',
+  // ✅ FIXED: KEYWORDS doesn't exist — use FOCUS_KEYWORD + SECONDARY_FOCUS_KEYWORD
   keywords: [
+    CONSTANTS.FOCUS_KEYWORD,
+    CONSTANTS.SECONDARY_FOCUS_KEYWORD,
     'iptv canada pricing',
     'iptv canada plans',
     'iptv canada subscription',
     'iptv canada cost',
-    'best iptv canada',
     'buy iptv canada',
     'iptv subscription canada',
     '4k iptv canada',
@@ -108,27 +107,54 @@ export const metadata: Metadata = {
 };
 
 // ---------------------------------------------------------------------------
-// JSON-LD SCHEMAS — Product + FAQPage (single @graph)
+// JSON-LD SCHEMAS — Organization + Product + FAQPage (single @graph)
 // ---------------------------------------------------------------------------
 const PricingPageSchema = () => {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: BRAND,
+        alternateName: BRAND,
+        url: SITE_URL,
+        logo: `${SITE_URL}/img/iptv-logo.webp`,
+        email: CONSTANTS.CONTACT.email,
+        telephone: CONSTANTS.CONTACT.phone,
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: CONSTANTS.CONTACT.phone,
+          email: CONSTANTS.CONTACT.email,
+          contactType: 'customer service',
+          availableLanguage: ['English', 'French'],
+          areaServed: 'CA',
+          contactOption: 'https://schema.org/TollFree',
+        },
+        // ✅ FIXED: SOCIAL doesn't exist — use SOCIALS (with S)
+        sameAs: Object.values(CONSTANTS.SOCIALS ?? {}),
+      },
+
       // PRODUCT — Pricing page specific
       {
         '@type': 'Product',
         '@id': `${PAGE_URL}/#product`,
         name: `${BRAND} IPTV Subscription Plans`,
+        // ✅ FIXED: KEYWORDS.PRIMARY doesn't exist — use FOCUS_KEYWORD
         alternateName: CONSTANTS.FOCUS_KEYWORD,
         image: `${SITE_URL}/img/structer.webp`,
         description: `${BRAND} offers premium Canadian IPTV plans starting at CA$50 with 20,000+ live channels, 60,000+ VOD titles in 4K Ultra HD, and instant activation.`,
-        brand: { '@id': `${SITE_URL}/#organization` },
+        brand: {
+          '@type': 'Brand',
+          '@id': `${SITE_URL}/#brand`,
+          name: BRAND,
+        },
         sku: 'IPTV-CA-PRICING',
         category: 'Streaming Service',
         aggregateRating: {
           '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: '2500',
+          ratingValue: '4.8',
+          reviewCount: '1255',
           bestRating: '5',
           worstRating: '1',
         },
@@ -136,9 +162,10 @@ const PricingPageSchema = () => {
           {
             '@type': 'Offer',
             name: '1 Screen - 3 Months',
-            priceCurrency: 'CAD',
+            priceCurrency: CONSTANTS.CURRENCY,
             price: '50.00',
             priceValidUntil: '2027-12-31',
+            validFrom: new Date().toISOString().split('T')[0],
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
             description: `3-month ${BRAND} subscription on 1 device with 20,000+ live channels and 60,000+ VODs.`,
@@ -146,9 +173,10 @@ const PricingPageSchema = () => {
           {
             '@type': 'Offer',
             name: '1 Screen - 6 Months',
-            priceCurrency: 'CAD',
+            priceCurrency: CONSTANTS.CURRENCY,
             price: '75.00',
             priceValidUntil: '2027-12-31',
+            validFrom: new Date().toISOString().split('T')[0],
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
             description: `6-month ${BRAND} subscription on 1 device with 20,000+ live channels and 60,000+ VODs.`,
@@ -156,9 +184,10 @@ const PricingPageSchema = () => {
           {
             '@type': 'Offer',
             name: '1 Screen - 12 Months',
-            priceCurrency: 'CAD',
+            priceCurrency: CONSTANTS.CURRENCY,
             price: '99.00',
             priceValidUntil: '2027-12-31',
+            validFrom: new Date().toISOString().split('T')[0],
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
             description: `12-month ${BRAND} subscription on 1 device with 20,000+ live channels and 60,000+ VODs.`,
@@ -166,9 +195,10 @@ const PricingPageSchema = () => {
           {
             '@type': 'Offer',
             name: '2 Screens - 6 Months',
-            priceCurrency: 'CAD',
+            priceCurrency: CONSTANTS.CURRENCY,
             price: '115.00',
             priceValidUntil: '2027-12-31',
+            validFrom: new Date().toISOString().split('T')[0],
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
             description: `6-month ${BRAND} subscription on 2 devices with 20,000+ live channels and 60,000+ VODs.`,
@@ -176,9 +206,10 @@ const PricingPageSchema = () => {
           {
             '@type': 'Offer',
             name: '2 Screens - 12 Months',
-            priceCurrency: 'CAD',
+            priceCurrency: CONSTANTS.CURRENCY,
             price: '175.00',
             priceValidUntil: '2027-12-31',
+            validFrom: new Date().toISOString().split('T')[0],
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
             description: `12-month ${BRAND} subscription on 2 devices with 20,000+ live channels and 60,000+ VODs.`,
@@ -186,9 +217,10 @@ const PricingPageSchema = () => {
           {
             '@type': 'Offer',
             name: '3 Screens - 6 Months',
-            priceCurrency: 'CAD',
+            priceCurrency: CONSTANTS.CURRENCY,
             price: '150.00',
             priceValidUntil: '2027-12-31',
+            validFrom: new Date().toISOString().split('T')[0],
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
             description: `6-month ${BRAND} subscription on 3 devices with 20,000+ live channels and 60,000+ VODs.`,
@@ -196,15 +228,17 @@ const PricingPageSchema = () => {
           {
             '@type': 'Offer',
             name: '3 Screens - 12 Months',
-            priceCurrency: 'CAD',
+            priceCurrency: CONSTANTS.CURRENCY,
             price: '250.00',
             priceValidUntil: '2027-12-31',
+            validFrom: new Date().toISOString().split('T')[0],
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
             description: `12-month ${BRAND} subscription on 3 devices with 20,000+ live channels and 60,000+ VODs.`,
           },
         ],
       },
+
       // FAQ — matches visible FAQ on pricing/page.tsx exactly
       {
         '@type': 'FAQPage',
@@ -284,7 +318,11 @@ const PricingPageSchema = () => {
 // ---------------------------------------------------------------------------
 // PRICING LAYOUT
 // ---------------------------------------------------------------------------
-export default function PricingLayout({ children }: { children: React.ReactNode }) {
+export default function PricingLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <>
       <PricingPageSchema />

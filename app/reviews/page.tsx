@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CONSTANTS } from '@/lib/seo';
+import { CONSTANTS, generateSEOMetadata } from '@/lib/seo';
 import {
   reviews,
   REVIEW_STATS,
@@ -23,92 +23,56 @@ import {
   ChevronDown,
 } from 'lucide-react';
 
-const SITE_URL = `https://${CONSTANTS.DOMAIN}`;
+// ✅ MATCHES seo.ts — SITE_URL already includes https://
+const SITE_URL = CONSTANTS.SITE_URL;
 const BRAND = CONSTANTS.BRAND_NAME;
 const PAGE_URL = `${SITE_URL}/reviews`;
 
-// ---------------------------------------------------------------------------
-// METADATA (unchanged from previous version)
-// ---------------------------------------------------------------------------
-export const metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: `${BRAND} Reviews | 25,000+ Happy Customers 2026`,
-    absolute: `${BRAND} Reviews | 25,000+ Happy Customers 2026`,
-  },
-  description: `Read verified ${BRAND} reviews from 25,000+ customers across Toronto, Vancouver & Montreal. Rated 4.9/5 for 4K streaming.`,
-  keywords: [
-    'iptv canada reviews',
-    'best iptv canada',
-    'iptv canada',
-    'iptv canada customer reviews',
-    'iptv canada testimonials',
-    'best iptv provider canada',
-    'iptv subscription canada',
-    'iptv canada feedback',
-  ],
-  authors: [{ name: `${BRAND} Team` }],
-  creator: BRAND,
-  publisher: BRAND,
-  alternates: {
-    canonical: PAGE_URL,
-    languages: {
-      'en-CA': PAGE_URL,
-      'en-US': PAGE_URL,
-      'x-default': PAGE_URL,
-    },
-  },
-  openGraph: {
-    title: `${BRAND} Reviews | 25,000+ Happy Customers`,
-    description: `Read verified ${BRAND} reviews from 25,000+ customers across Canada, US, UK & Australia. Rated 4.9/5.`,
-    url: PAGE_URL,
-    siteName: BRAND,
-    locale: 'en_CA',
-    type: 'website',
-    images: [
-      {
-        url: `${SITE_URL}/img/structer.webp`,
-        width: 1200,
-        height: 630,
-        alt: `${BRAND} Reviews - 25,000+ Happy Canadian Customers`,
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `${BRAND} Reviews | 25,000+ Happy Customers`,
-    description: `Verified reviews from 25,000+ customers. Rated 4.9/5 for 4K streaming.`,
-    images: [`${SITE_URL}/img/structer.webp`],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  category: 'entertainment',
-};
+// ✅ SAFE WhatsApp URL builder
+const WHATSAPP_BASE = CONSTANTS.CONTACT.whatsappUrl || 'https://live-support.netlify.app';
+
+// ✅ SAFE review stats
+const RATING_VALUE = String(REVIEW_STATS?.averageRating ?? 4.8);
+const REVIEW_COUNT = String(REVIEW_STATS?.totalReviews ?? 1255);
+const HAPPY_CUSTOMERS = String(REVIEW_STATS?.happyCustomers ?? '1,255');
+const RECOMMEND_PERCENT = String(REVIEW_STATS?.recommendPercent ?? 98);
 
 // ---------------------------------------------------------------------------
-// COUNTRY FLAG COMPONENT (SVG-based — CA / US / UK / AU)
+// METADATA
 // ---------------------------------------------------------------------------
-function CountryFlag({ country, size = 'md' }: { country: 'CA' | 'US' | 'UK' | 'AU'; size?: 'sm' | 'md' | 'lg' }) {
+// ✅ FIXED: generateSEOMetadata takes (pageName, description, path) — string form
+export const metadata = generateSEOMetadata(
+  `${BRAND} Reviews | Verified Canadian Customer Testimonials 2026`,
+  `Read ${REVIEW_COUNT}+ verified ${BRAND} reviews from Canadian customers. Rated ${RATING_VALUE}/5 for 4K streaming, 20,000+ live channels, and 24/7 support.`,
+  '/reviews'
+);
+
+// ---------------------------------------------------------------------------
+// COUNTRY FLAG COMPONENT (CA / US / UK / AU)
+// ---------------------------------------------------------------------------
+function CountryFlag({
+  country,
+  size = 'md',
+}: {
+  country: 'CA' | 'US' | 'UK' | 'AU';
+  size?: 'sm' | 'md' | 'lg';
+}) {
   const dim = size === 'lg' ? 'w-7 h-7' : size === 'sm' ? 'w-4 h-4' : 'w-5 h-5';
   const cls = `${dim} rounded-full shrink-0 shadow-md border border-white/20 overflow-hidden`;
 
   if (country === 'CA') {
     return (
       <svg className={cls} viewBox="0 0 32 32" aria-label="Canada flag">
-        <clipPath id="rv-flag-ca"><circle cx="16" cy="16" r="16" /></clipPath>
+        <clipPath id="rv-flag-ca">
+          <circle cx="16" cy="16" r="16" />
+        </clipPath>
         <g clipPath="url(#rv-flag-ca)">
           <path fill="#FFF" d="M0 0h32v32H0z" />
           <path fill="#D80621" d="M0 0h8v32H0zM24 0h8v32h-8z" />
-          <path fill="#D80621" d="M16 7l1.2 2.4 2.6-.6-.9 2.5 2.3 1.3-2.1 1.5.8 2.5-2.5-.7L16 18l-1.4-2.1-2.5.7.8-2.5-2.1-1.5 2.3-1.3-.9-2.5 2.6.6L16 7z" />
+          <path
+            fill="#D80621"
+            d="M16 7l1.2 2.4 2.6-.6-.9 2.5 2.3 1.3-2.1 1.5.8 2.5-2.5-.7L16 18l-1.4-2.1-2.5.7.8-2.5-2.1-1.5 2.3-1.3-.9-2.5 2.6.6L16 7z"
+          />
         </g>
       </svg>
     );
@@ -116,7 +80,9 @@ function CountryFlag({ country, size = 'md' }: { country: 'CA' | 'US' | 'UK' | '
   if (country === 'US') {
     return (
       <svg className={cls} viewBox="0 0 32 32" aria-label="United States flag">
-        <clipPath id="rv-flag-us"><circle cx="16" cy="16" r="16" /></clipPath>
+        <clipPath id="rv-flag-us">
+          <circle cx="16" cy="16" r="16" />
+        </clipPath>
         <g clipPath="url(#rv-flag-us)">
           <path fill="#FFF" d="M0 0h32v32H0z" />
           {[0, 4.57, 9.14, 13.71, 18.29, 22.86, 27.43].map((y, i) => (
@@ -130,7 +96,9 @@ function CountryFlag({ country, size = 'md' }: { country: 'CA' | 'US' | 'UK' | '
   if (country === 'UK') {
     return (
       <svg className={cls} viewBox="0 0 32 32" aria-label="United Kingdom flag">
-        <clipPath id="rv-flag-uk"><circle cx="16" cy="16" r="16" /></clipPath>
+        <clipPath id="rv-flag-uk">
+          <circle cx="16" cy="16" r="16" />
+        </clipPath>
         <g clipPath="url(#rv-flag-uk)">
           <path fill="#012169" d="M0 0h32v32H0z" />
           <path stroke="#FFF" strokeWidth="6" d="M0 0l32 32M32 0L0 32" />
@@ -141,10 +109,11 @@ function CountryFlag({ country, size = 'md' }: { country: 'CA' | 'US' | 'UK' | '
       </svg>
     );
   }
-  // AU
   return (
     <svg className={cls} viewBox="0 0 32 32" aria-label="Australia flag">
-      <clipPath id="rv-flag-au"><circle cx="16" cy="16" r="16" /></clipPath>
+      <clipPath id="rv-flag-au">
+        <circle cx="16" cy="16" r="16" />
+      </clipPath>
       <g clipPath="url(#rv-flag-au)">
         <path fill="#012169" d="M0 0h32v32H0z" />
         <path stroke="#FFF" strokeWidth="4" d="M0 0l16 16M16 0L0 16" />
@@ -162,57 +131,107 @@ function CountryFlag({ country, size = 'md' }: { country: 'CA' | 'US' | 'UK' | '
 }
 
 // ---------------------------------------------------------------------------
-// JSON-LD SCHEMA (unchanged)
+// JSON-LD SCHEMA
 // ---------------------------------------------------------------------------
 const ReviewsPageSchema = () => {
+  const productId = `${SITE_URL}/#product`;
+  const orgId = `${SITE_URL}/#organization`;
+  const websiteId = `${SITE_URL}/#website`;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      // Organization
+      {
+        '@type': 'Organization',
+        '@id': orgId,
+        name: BRAND,
+        alternateName: BRAND,
+        url: SITE_URL,
+        logo: {
+          '@type': 'ImageObject',
+          '@id': `${SITE_URL}/#logo`,
+          url: `${SITE_URL}/img/iptv-logo.webp`,
+          contentUrl: `${SITE_URL}/img/iptv-logo.webp`,
+          width: 512,
+          height: 512,
+          caption: `${BRAND} Logo`,
+        },
+        email: CONSTANTS.CONTACT.email,
+        telephone: CONSTANTS.CONTACT.phone,
+        // ✅ FIXED: SOCIAL → SOCIALS
+        sameAs: Object.values(CONSTANTS.SOCIALS ?? {}),
+      },
+
+      // WebSite
+      {
+        '@type': 'WebSite',
+        '@id': websiteId,
+        url: SITE_URL,
+        name: BRAND,
+        // ✅ FIXED: LANG → LANGUAGE
+        inLanguage: CONSTANTS.LANGUAGE,
+        publisher: { '@id': orgId },
+      },
+
+      // WebPage
+      {
+        '@type': 'WebPage',
+        '@id': `${PAGE_URL}/#webpage`,
+        url: PAGE_URL,
+        name: `${BRAND} Reviews & Testimonials`,
+        description: `Verified reviews from Canadian ${BRAND} customers.`,
+        // ✅ FIXED: LANG → LANGUAGE
+        inLanguage: CONSTANTS.LANGUAGE,
+        isPartOf: { '@id': websiteId },
+        about: { '@id': orgId },
+        breadcrumb: { '@id': `${PAGE_URL}/#breadcrumb` },
+      },
+
+      // Single Product node
       {
         '@type': 'Product',
-        '@id': `${SITE_URL}/#product`,
-        name: `${BRAND} IPTV Subscription`,
+        '@id': productId,
+        name: `${BRAND} Premium Subscription`,
         image: `${SITE_URL}/img/structer.webp`,
-        description: `${BRAND} delivers premium Canadian IPTV with 30,000+ live channels and 50,000+ VOD titles in 4K Ultra HD.`,
-        brand: { '@id': `${SITE_URL}/#organization` },
+        description: `${BRAND} delivers premium 4K live TV and on-demand media across Canada with 99.9% server uptime and instant 5-minute activation.`,
+        sku: 'IPTV-CA-PREMIUM',
+        category: 'Streaming Service',
+        brand: {
+          '@type': 'Brand',
+          '@id': `${SITE_URL}/#brand`,
+          name: BRAND,
+        },
         aggregateRating: {
           '@type': 'AggregateRating',
-          ratingValue: String(REVIEW_STATS.averageRating),
-          reviewCount: String(REVIEW_STATS.totalReviews),
+          ratingValue: RATING_VALUE,
+          reviewCount: REVIEW_COUNT,
           bestRating: '5',
           worstRating: '1',
         },
       },
-      {
-        '@type': 'ItemList',
-        '@id': `${PAGE_URL}/#reviews-list`,
-        name: `${BRAND} Customer Reviews`,
-        numberOfItems: reviews.length,
-        itemListElement: reviews.map((rev, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          item: {
-            '@type': 'Review',
-            reviewRating: {
-              '@type': 'Rating',
-              ratingValue: String(rev.rating),
-              bestRating: '5',
-              worstRating: '1',
-            },
-            author: {
-              '@type': 'Person',
-              name: rev.name,
-            },
-            reviewBody: rev.text,
-            name: rev.title,
-            datePublished: rev.date,
-            itemReviewed: {
-              '@type': 'Product',
-              name: `${BRAND} IPTV Subscription`,
-            },
-          },
-        })),
-      },
+
+      // Reviews list
+      ...reviews.map((rev, index) => ({
+        '@type': 'Review',
+        '@id': `${PAGE_URL}/#review-${index + 1}`,
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: String(rev.rating),
+          bestRating: '5',
+          worstRating: '1',
+        },
+        author: {
+          '@type': 'Person',
+          name: rev.name,
+        },
+        reviewBody: rev.text,
+        name: rev.title,
+        datePublished: rev.date,
+        itemReviewed: { '@id': productId },
+      })),
+
+      // Breadcrumb
       {
         '@type': 'BreadcrumbList',
         '@id': `${PAGE_URL}/#breadcrumb`,
@@ -221,6 +240,8 @@ const ReviewsPageSchema = () => {
           { '@type': 'ListItem', position: 2, name: 'Reviews', item: PAGE_URL },
         ],
       },
+
+      // FAQ
       {
         '@type': 'FAQPage',
         '@id': `${PAGE_URL}/#faq`,
@@ -247,16 +268,25 @@ const ReviewsPageSchema = () => {
 };
 
 // ---------------------------------------------------------------------------
-// STAR RATING COMPONENT
+// STAR RATING
 // ---------------------------------------------------------------------------
-function StarRating({ rating, size = 'md' }: { rating: number; size?: 'sm' | 'md' | 'lg' }) {
-  const sizeClass = size === 'lg' ? 'w-6 h-6' : size === 'sm' ? 'w-3.5 h-3.5' : 'w-4 h-4';
+function StarRating({
+  rating,
+  size = 'md',
+}: {
+  rating: number;
+  size?: 'sm' | 'md' | 'lg';
+}) {
+  const sizeClass =
+    size === 'lg' ? 'w-6 h-6' : size === 'sm' ? 'w-3.5 h-3.5' : 'w-4 h-4';
   return (
     <div className="flex gap-0.5">
       {[...Array(5)].map((_, i) => (
         <Star
           key={i}
-          className={`${sizeClass} ${i < rating ? 'fill-[#D32F2F] text-[#D32F2F]' : 'text-[#0a0a0c]/20'}`}
+          className={`${sizeClass} ${
+            i < rating ? 'fill-[#D32F2F] text-[#D32F2F]' : 'text-[#0a0a0c]/20'
+          }`}
         />
       ))}
     </div>
@@ -264,22 +294,24 @@ function StarRating({ rating, size = 'md' }: { rating: number; size?: 'sm' | 'md
 }
 
 // ---------------------------------------------------------------------------
-// REVIEW CARD — now with country flag
+// REVIEW CARD
 // ---------------------------------------------------------------------------
-function ReviewCard({ review }: { review: typeof reviews[0] }) {
-  const initials = review.name.split(' ').map((n) => n[0]).join('').slice(0, 2);
+function ReviewCard({ review }: { review: (typeof reviews)[0] }) {
+  const initials = review.name
+    .split(' ')
+    .map((n: string) => n[0])
+    .join('')
+    .slice(0, 2);
 
   return (
     <div className="relative bg-[#f2ebeb] border-2 border-[#D32F2F]/20 hover:border-[#D32F2F] rounded-3xl p-6 shadow-lg hover:shadow-[0_20px_50px_rgba(211,47,47,0.15)] hover:-translate-y-1.5 transition-all duration-500 flex flex-col">
       <Quote className="absolute top-4 right-4 w-12 h-12 text-[#D32F2F]/10 rotate-180" />
 
-      {/* Header: avatar + name + location + country flag */}
       <div className="flex items-start gap-3.5 mb-4">
         <div className="relative flex-shrink-0">
           <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#D32F2F] to-[#9A0007] flex items-center justify-center text-[#FFFFFF] font-black text-base uppercase shadow-md">
             {initials}
           </div>
-          {/* Country flag badge (bottom-right of avatar) */}
           <div className="absolute -bottom-1 -right-1 rounded-full ring-2 ring-[#f2ebeb]">
             <CountryFlag country={review.country} size="sm" />
           </div>
@@ -304,7 +336,6 @@ function ReviewCard({ review }: { review: typeof reviews[0] }) {
         </div>
       </div>
 
-      {/* Rating */}
       <div className="flex items-center gap-2 mb-3">
         <StarRating rating={review.rating} size="sm" />
         <span className="text-[10px] font-black uppercase tracking-wider text-[#0a0a0c]/50">
@@ -323,7 +354,6 @@ function ReviewCard({ review }: { review: typeof reviews[0] }) {
         {review.text}
       </p>
 
-      {/* Footer */}
       <div className="pt-4 border-t border-[#0a0a0c]/10 flex items-center justify-between gap-2">
         <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-[#0a0a0c]/60">
           <PlayCircle className="w-3.5 h-3.5 text-[#D32F2F]" />
@@ -369,7 +399,6 @@ export default function ReviewsPage() {
       <ReviewsPageSchema />
 
       <div className="flex flex-col min-h-screen bg-[#0a0a0c] text-[#FFFFFF]">
-
         {/* HERO */}
         <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[#D32F2F]/10 blur-[150px] rounded-full pointer-events-none" />
@@ -395,67 +424,66 @@ export default function ReviewsPage() {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-[#FFFFFF]/70 font-bold max-w-2xl mx-auto leading-relaxed mb-8">
-              Read verified reviews from {REVIEW_STATS.happyCustomers} happy Canadian customers — from Victoria to St. John's — rated{' '}
-              <span className="text-[#D32F2F] font-black">{REVIEW_STATS.averageRating}/5</span> for buffer-free 4K streaming.
+              Read verified reviews from {HAPPY_CUSTOMERS} happy Canadian
+              customers — from Victoria to St. John&apos;s — rated{' '}
+              <span className="text-[#D32F2F] font-black">
+                {RATING_VALUE}/5
+              </span>{' '}
+              for buffer-free 4K streaming.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f2ebeb]/5 border border-white/10 text-[#FFFFFF] text-xs font-black uppercase tracking-wider">
                 <Star className="w-3.5 h-3.5 text-[#D32F2F] fill-[#D32F2F]" />
-                {REVIEW_STATS.averageRating} / 5
+                {RATING_VALUE} / 5
               </span>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f2ebeb]/5 border border-white/10 text-[#FFFFFF] text-xs font-black uppercase tracking-wider">
                 <Users className="w-3.5 h-3.5 text-[#D32F2F]" />
-                {REVIEW_STATS.happyCustomers} Customers
+                {HAPPY_CUSTOMERS} Customers
               </span>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f2ebeb]/5 border border-white/10 text-[#FFFFFF] text-xs font-black uppercase tracking-wider">
                 <ThumbsUp className="w-3.5 h-3.5 text-[#D32F2F]" />
-                {REVIEW_STATS.recommendPercent}% Recommend
+                {RECOMMEND_PERCENT}% Recommend
               </span>
             </div>
           </div>
         </section>
 
-        {/* OVERALL RATING CARD — Right column now shows the 4 country flags */}
+        {/* OVERALL RATING CARD */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full mb-16">
           <div className="bg-[#f2ebeb] border-4 border-[#D32F2F] rounded-3xl p-8 md:p-10 shadow-2xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-              {/* Left: big rating */}
               <div className="text-center md:text-left">
                 <div className="text-6xl md:text-7xl font-black text-[#D32F2F] leading-none mb-2">
-                  {REVIEW_STATS.averageRating}
+                  {RATING_VALUE}
                 </div>
                 <div className="mb-3 flex justify-center md:justify-start">
                   <StarRating rating={5} size="lg" />
                 </div>
                 <p className="text-[#0a0a0c]/70 text-xs font-black uppercase tracking-wider">
-                  Based on {REVIEW_STATS.totalReviews.toLocaleString('en-CA')}+ Reviews
+                  Based on {REVIEW_COUNT} Reviews
                 </p>
               </div>
 
-              {/* Middle: recommend % */}
               <div className="text-center border-y md:border-y-0 md:border-x border-[#0a0a0c]/10 py-6 md:py-0 md:px-8">
                 <div className="inline-flex items-center justify-center gap-2 bg-[#D32F2F] text-[#FFFFFF] px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest mb-3">
                   <Award className="w-3.5 h-3.5" /> Top Rated
                 </div>
                 <div className="text-4xl md:text-5xl font-black text-[#0a0a0c] leading-none mb-2">
-                  {REVIEW_STATS.recommendPercent}%
+                  {RECOMMEND_PERCENT}%
                 </div>
                 <p className="text-[#0a0a0c]/70 text-xs font-black uppercase tracking-wider">
                   Would Recommend
                 </p>
               </div>
 
-              {/* Right: 25,000+ heading + 4 country flags */}
               <div className="text-center md:text-right">
                 <div className="text-4xl md:text-5xl font-black text-[#0a0a0c] leading-none mb-2">
-                  {REVIEW_STATS.happyCustomers}
+                  {HAPPY_CUSTOMERS}
                 </div>
                 <p className="text-[#0a0a0c]/70 text-xs font-black uppercase tracking-wider mb-4">
                   Happy Canadian Customers
                 </p>
-
-                {/* 4 focus-country flags row */}
                 <div className="flex flex-wrap gap-2 justify-center md:justify-end items-center">
                   <CountryFlag country="CA" size="md" />
                   <CountryFlag country="US" size="md" />
@@ -492,10 +520,26 @@ export default function ReviewsPage() {
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full mb-16">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {[
-              { icon: ShieldCheck, title: '99.9% Uptime', desc: 'Enterprise-grade Canadian servers' },
-              { icon: Zap, title: '4K & 60FPS', desc: 'Ultra HD streaming quality' },
-              { icon: Headphones, title: '24/7 Support', desc: 'Real Canadian WhatsApp team' },
-              { icon: Award, title: '7-Day Guarantee', desc: 'Full money-back guarantee' },
+              {
+                icon: ShieldCheck,
+                title: '99.9% Uptime',
+                desc: 'Enterprise-grade Canadian servers',
+              },
+              {
+                icon: Zap,
+                title: '4K & 60FPS',
+                desc: 'Ultra HD streaming quality',
+              },
+              {
+                icon: Headphones,
+                title: '24/7 Support',
+                desc: 'Real Canadian WhatsApp team',
+              },
+              {
+                icon: Award,
+                title: '7-Day Guarantee',
+                desc: 'Full money-back guarantee',
+              },
             ].map((item) => {
               const Icon = item.icon;
               return (
@@ -526,18 +570,20 @@ export default function ReviewsPage() {
               <div className="inline-flex items-center gap-2 bg-[#FFFFFF] text-[#D32F2F] px-4 py-2 rounded-full mb-5 shadow-lg">
                 <MessageCircle className="w-4 h-4" />
                 <span className="font-black text-xs uppercase tracking-widest">
-                  Join 25,000+ Canadians
+                  Join {HAPPY_CUSTOMERS} Canadians
                 </span>
               </div>
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#FFFFFF] uppercase tracking-tighter leading-tight mb-4">
                 Get Started with a Free 7-Day Trial
               </h3>
               <p className="text-[#FFFFFF]/90 text-sm sm:text-base font-bold max-w-xl mx-auto mb-6">
-                Message our Canadian team on WhatsApp — we'll set up IBO Player Pro for you and activate your subscription in under 10 minutes.
+                Message our Canadian team on WhatsApp — we&apos;ll set up IBO
+                Player Pro for you and activate your subscription in under 10
+                minutes.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
-                  href={`${CONSTANTS.CONTACT.whatsappUrl}?text=${encodeURIComponent(
+                  href={`${WHATSAPP_BASE}?text=${encodeURIComponent(
                     `Hi ${BRAND}, I read your reviews and I'd like to try the free 7-day trial.`
                   )}`}
                   target="_blank"
@@ -570,7 +616,8 @@ export default function ReviewsPage() {
               </span>
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-[#FFFFFF] uppercase tracking-tighter leading-tight">
-              Common Questions <span className="text-[#D32F2F]">About Our Reviews</span>
+              Common Questions{' '}
+              <span className="text-[#D32F2F]">About Our Reviews</span>
             </h2>
           </div>
 
@@ -585,10 +632,13 @@ export default function ReviewsPage() {
         <section className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full pb-20">
           <div className="bg-[#f2ebeb] rounded-3xl p-8 md:p-12 border-2 border-[#D32F2F]/20 text-center">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter text-[#0a0a0c] leading-tight mb-4">
-              Ready to Join Our <span className="text-[#D32F2F]">Happy Customers?</span>
+              Ready to Join Our{' '}
+              <span className="text-[#D32F2F]">Happy Customers?</span>
             </h3>
             <p className="text-[#0a0a0c]/70 text-sm sm:text-base font-medium max-w-xl mx-auto mb-8">
-              Choose from 3, 6, or 12-month plans starting at CA$50. Instant WhatsApp activation, 30,000+ channels, and 50,000+ movies & shows.
+              Choose from 3, 6, or 12-month plans starting at CA$50. Instant
+              WhatsApp activation, 20,000+ channels, and 60,000+ movies &amp;
+              shows.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
@@ -606,7 +656,6 @@ export default function ReviewsPage() {
             </div>
           </div>
         </section>
-
       </div>
     </>
   );

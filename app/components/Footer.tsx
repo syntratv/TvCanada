@@ -82,6 +82,8 @@ const navigationLinks = [
   { name: 'FAQ', href: '/faq' },
   { name: 'Blog & Guide', href: '/blog' },
   { name: 'Support', href: '/support' },
+  { name: 'Reseller Program', href: '/reseller' },
+
 ];
 
 const legalLinks = [

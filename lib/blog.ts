@@ -325,6 +325,669 @@ export const buildFAQItem = (
 // BLOG POSTS — 8 ARTICLES
 // ---------------------------------------------------------------------------
 export const blogPosts: BlogPost[] = [
+  
+
+  // =========================================================================
+// ARTICLE 7 — REVIEW
+// Where to Buy IPTV in Montreal: Best Providers Ranked (auto year)
+// =========================================================================
+{
+  id: "7",
+  slug: "where-to-buy-iptv-montreal",
+  title: `Where to Buy IPTV in Montreal: Best Providers Ranked (${new Date().getFullYear()})`,
+  description: `Where to buy IPTV in Montreal safely — ranked providers, RDS & TVA channel coverage, CAD pricing, and how to avoid scams before you pay in ${new Date().getFullYear()}.`,
+  excerpt: `Looking for where to buy IPTV in Montreal? Here are the providers worth your money, the ones to avoid, and how to set up IBO Player Pro in under five minutes.`,
+  date: "2026-11-08",
+  author: "Jessica",
+  keywords: [
+    "where to buy iptv montreal",
+    "iptv montreal",
+    "best iptv in montreal",
+    "montreal iptv canada",
+    "montreal iptv provider",
+    "best iptv montreal",
+    "iptv quebec",
+    "iptv canada",
+  ],
+  image: "/img/blog/article-07/cover.webp",
+  category: "review",
+  readTime: "9 min read",
+  featured: false,
+  content: `
+    ${ARTICLE_STYLE_BLOCK}
+
+    <p>
+      If you live in Montreal and you're ready to finally cut the cable bill, the hardest part isn't the decision. It's figuring out where to buy IPTV without getting scammed, without overpaying, and without ending up with a service that buffers every time the Canadiens are on Saturday night.
+    </p>
+
+    <p>
+      Search "IPTV Montreal" and you'll get a hundred websites, most of them running the same copy-pasted template with different logos. Some are legitimate Canadian operations. Others are shell sites that take your money and disappear within weeks. From the outside, they look identical. This guide is here to change that.
+    </p>
+
+    <p>
+      What follows is an honest breakdown of where Montrealers should actually buy IPTV in ${new Date().getFullYear()}, what to check before you pay, which providers are worth your money, and how to get set up in under five minutes once you've made your choice. No marketing spin, no vague claims. Just the practical answer.
+    </p>
+
+    <img src="/img/blog/article-07/image-01.webp" alt="Montreal household comparing IPTV providers before buying" class="article-image" />
+
+    <h2>Why Montreal Buyers Need to Be Careful</h2>
+
+    <p>
+      Montreal has become a target market for sketchy IPTV resellers in the last two years. That's partly because Quebec internet is fast, partly because cable prices here are among the highest in Canada, and partly because the bilingual market confuses global IPTV operators who don't understand what Montreal households actually need.
+    </p>
+
+    <p>
+      The problem is simple. A Montreal IPTV buyer needs three things that a generic global provider can't reliably deliver. First, French-language coverage that includes RDS 1-2, RDS Info, TVA Sports, TVA, Radio-Canada, Noovo, and LCN as named networks — not vague "French channels" in a footer. Second, servers close enough to Quebec that peak-hour streaming doesn't stutter during Canadiens games. Third, support that responds in a language and timezone that makes sense for you.
+    </p>
+
+    <p>
+      When a global reseller can't deliver those three things, they hide behind polished marketing and CAD$8.25 monthly plans. When a real provider can, they don't need to. That's how you tell them apart.
+    </p>
+
+    <h2>The 6 Things to Check Before Buying IPTV in Montreal</h2>
+
+    <p>
+      Before you spend money on any IPTV service, run through this checklist. It takes five minutes and it will save you from every common scam.
+    </p>
+
+    <ul>
+      <li><strong>Confirm the full French lineup is listed.</strong> Look for RDS 1-2, RDS Info, TVA Sports, TVA, Radio-Canada, Noovo, and LCN named explicitly. If they can't list their own channels, they don't know their own service.</li>
+      <li><strong>Ask where their servers are located.</strong> Real Montreal IPTV providers run CDN servers in Canada or on the East Coast. If they can't answer, assume Europe — and assume buffering.</li>
+      <li><strong>Check the CAD payment options.</strong> Interac e-Transfer, credit card, PayPal, and crypto are the four legitimate ones. If a provider only accepts Bitcoin, walk away.</li>
+      <li><strong>Test support response time before you pay.</strong> Message them on WhatsApp during your research. If they're slow while you're still deciding, imagine after you've paid.</li>
+      <li><strong>Look for a real trial option.</strong> A short free trial or entry-level plan lets you test the service. Refusing any trial is a warning sign.</li>
+      <li><strong>Verify the refund policy.</strong> A legitimate Canadian provider publishes a clear money-back guarantee. Vague language means no refund.</li>
+    </ul>
+
+    <h2>Ranked: Where to Buy IPTV in Montreal (2026)</h2>
+
+    <p>
+      Here's how the categories stack up when you're buying from Montreal specifically. Different tiers serve different households, but for most people, the top tier is where the value actually lives.
+    </p>
+
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Provider Type</th>
+            <th>Typical Price (CAD)</th>
+            <th>French Channels</th>
+            <th>Peak-Hour Stability</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Dedicated Canadian IPTV</td><td>$10 to $15 / month</td><td>Full RDS + TVA lineup</td><td>Excellent</td></tr>
+          <tr><td>Budget Reseller</td><td>$3 to $5 / month</td><td>Partial, unreliable</td><td>Poor</td></tr>
+          <tr><td>Free M3U Lists</td><td>Free</td><td>Random, mostly broken</td><td>None</td></tr>
+          <tr><td>Videotron / Bell Cable</td><td>$120 to $180 / month</td><td>Full lineup</td><td>Excellent</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The dedicated Canadian category is where the value lives for Montreal buyers. It's the only category that reliably delivers the full French lineup, stable peak-hour streaming, and real support at a price that still saves you hundreds of dollars a year versus cable.
+    </p>
+
+    <h3>Category 1 — Dedicated Canadian IPTV Providers (Recommended)</h3>
+
+    <p>
+      These are services that own and operate their own infrastructure, with servers in Canada and on the East Coast. They carry the full French-Canadian lineup and stable English lineup on the same subscription. Pricing usually runs $10 to $15 CAD per month, or $50 to $100 CAD for a full year. Support is on WhatsApp, in English and French, 24/7.
+    </p>
+
+    <p>
+      This is what our service is — and it's why we can stream an NHL playoff game at 60fps without buffering while a budget reseller is telling their customers to "try again later." You can see every plan on our <a href="/pricing" class="internal-link">IPTV Canada pricing page</a>, all in CAD.
+    </p>
+
+    <h3>Category 2 — Budget Resellers</h3>
+
+    <p>
+      Rented access, shared servers, low prices. In Montreal, these services freeze reliably during every big Canadiens game because their upstream infrastructure can't handle Quebec's peak-hour demand. French channel coverage is usually spotty — TVA yes, RDS Info almost never. Cheaper up front, expensive in frustration.
+    </p>
+
+    <h3>Category 3 — Free M3U Lists</h3>
+
+    <p>
+      Shared through Telegram groups and Reddit threads. Free, unreliable, and often dead within days. Worth mentioning only so you know to skip them entirely. You get what you pay for.
+    </p>
+
+    <h3>Category 4 — Traditional Cable</h3>
+
+    <p>
+      Videotron, Bell Fibe, Cogeco EPICO. Legitimate businesses, excellent service, and expensive. Montreal households typically pay $120 to $180 CAD per month for a full sports and French lineup. If cable is what you want, buy cable. If you want the same channels for a fifth of the price, the top category is where you should look.
+    </p>
+
+    <img src="/img/blog/article-07/image-02.webp" alt="Buying IPTV in Montreal online with CAD pricing" class="article-image" />
+
+    <h2>Why IBO Player Pro Is What Every Montreal Buyer Should Use</h2>
+
+    <p>
+      Where you buy IPTV matters. What you watch it on matters just as much. In Montreal, the player we recommend for every household is IBO Player Pro — and there are good reasons specific to this market.
+    </p>
+
+    <ul>
+      <li><strong>Fast zapping between RDS and TVA Sports.</strong> Under a second between channels. That matters during hockey intermissions when you're flipping between RDS Info and Radio-Canada.</li>
+      <li><strong>Bilingual EPG support.</strong> The TV guide pulls French and English program data cleanly, on Eastern Time, without syncing issues.</li>
+      <li><strong>Xtream Codes login.</strong> The fastest way to pull your full channel lineup and guide in one shot.</li>
+      <li><strong>Stable 4K playback.</strong> When your IPTV provider delivers a 4K RDS feed, IBO Player Pro holds it without frame drops or audio sync issues.</li>
+      <li><strong>Free seven-day trial.</strong> Test it with your IPTV Montreal subscription before deciding to keep it.</li>
+    </ul>
+
+    <p>
+      IBO Player Pro is a paid app with its own small subscription, and it's not included with your IPTV Canada plan. But the free trial means you can see how it handles your Montreal channels before paying anything. If you'd like to buy an activation licence, message us on WhatsApp and we'll walk you through it in a couple of minutes. We sell the activation directly, so you don't have to search for it.
+    </p>
+
+    <h2>How Much Montrealers Actually Save by Switching</h2>
+
+    <p>
+      The cost difference is why most Montrealers start looking at IPTV in the first place. Here's what the real math looks like.
+    </p>
+
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Monthly Cost (CAD)</th>
+            <th>Annual Cost (CAD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Videotron Helix TV Extra</td><td>$124.95</td><td>$1,499.40</td></tr>
+          <tr><td>Bell Fibe TV + Sports Add-on</td><td>$137.99</td><td>$1,655.88</td></tr>
+          <tr><td>IPTV Canada 12-Month Plan</td><td>$8.25</td><td>$99.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      That's roughly $1,400 in annual savings for a Montreal household, even after adding a streaming subscription or two. But savings only matter if the service actually works. A cheap IPTV provider that freezes during every Canadiens game isn't saving you money — it's costing you the experience you're paying for. That's why the buy decision matters so much.
+    </p>
+
+    <h2>Where to Actually Buy: The Answer</h2>
+
+    <p>
+      If you're in Montreal and you want a straight answer, here it is. Buy from a dedicated Canadian IPTV provider that owns its own East Coast infrastructure, carries the full French-Canadian lineup, and answers you on WhatsApp within minutes. Skip the budget resellers, skip the free lists, and don't overthink the device — any Firestick, Smart TV, Android box, or iPhone will work.
+    </p>
+
+    <p>
+      Our service fits that description. If you want to see the full lineup and pricing, our <a href="/pricing" class="internal-link">IPTV Canada plans page</a> lays it out in plain CAD. If you want to hear from real customers in Montreal, Laval, and across Quebec, our <a href="/reviews" class="internal-link">verified customer reviews</a> page has honest feedback. And if you're still deciding which player to use once you buy, our <a href="/blog/how-to-install-iptv-firestick-canada" class="internal-link">Firestick setup guide</a> walks through the whole IBO Player Pro installation from start to finish.
+    </p>
+
+    <img src="/img/blog/article-07/image-03.webp" alt="Setting up IBO Player Pro after buying IPTV in Montreal" class="article-image" />
+
+    <h2>What Montrealers Actually Watch After Buying</h2>
+
+    <p>
+      A good Montreal IPTV subscription should cover three areas without extra fees.
+    </p>
+
+    <ul>
+      <li><strong>Francophone sports and news.</strong> RDS 1-2 and RDS Info for Canadiens coverage, TVA Sports for the full NHL schedule, LCN and Radio-Canada for news and analysis.</li>
+      <li><strong>English Canadian networks.</strong> CBC, CTV, Global, Citytv, TSN 1-5, and Sportsnet regional feeds for households that watch both languages.</li>
+      <li><strong>International content.</strong> Montreal is a multicultural city. Haitian, Latin American, Middle Eastern, and Asian channels are in demand, and a serious provider covers 100+ countries without charging extra.</li>
+    </ul>
+
+    <h2>Common Mistakes Montreal Buyers Make</h2>
+
+    <p>
+      The single biggest mistake is buying on price alone. A $3 monthly plan that buffers during every game is worse value than a $12 plan that just works. The second biggest mistake is buying from a website with no business identity — no address, no phone, just an email address and a WhatsApp link. If a provider won't tell you who they are, don't send them money.
+    </p>
+
+    <p>
+      The third mistake is not testing during peak hours. Buy a trial, wait for a Saturday night Canadiens game, and stream it. That's the only real test that matters. If the stream holds without buffering, the provider is legitimate. If it collapses, you've learned what you needed to know before committing.
+    </p>
+
+    <div class="faq-section-header">
+      <h2>Frequently Asked Questions</h2>
+      <span class="faq-section-badge">05 Questions</span>
+    </div>
+
+    <div class="faq-container">
+      ${buildFAQItem('Where can I safely buy IPTV in Montreal?', 'Buy from a dedicated Canadian IPTV provider that owns its own servers on the East Coast, carries the full French-Canadian lineup (RDS, TVA Sports, Radio-Canada), accepts CAD payments through Interac e-Transfer or credit card, and offers a real trial. Avoid budget resellers and free M3U lists — they fail during peak hours and offer no support.', true, 0)}
+      ${buildFAQItem('Is it legal to buy and use IPTV in Montreal?', 'IPTV technology is legal in Canada. What varies is the content source. The safest approach is to buy from a provider that operates transparently, explains their service clearly, and uses legitimate infrastructure. Providers that hide their identity or only accept crypto payments are the ones to avoid.', false, 1)}
+      ${buildFAQItem('How much should I pay for IPTV in Montreal?', 'A high-quality Montreal IPTV subscription typically runs $10 to $15 CAD per month, or $50 to $100 CAD for a full year. Anything significantly cheaper is usually a budget reseller with unstable servers. Anything significantly more expensive should include premium features like multi-screen and 4K HDR support.', false, 2)}
+      ${buildFAQItem('What channels should I expect from a Montreal IPTV service?', 'A serious Montreal IPTV provider should carry RDS 1-2, RDS Info, TVA Sports, TVA, Radio-Canada, Noovo, and LCN, plus the full English Canadian lineup (CBC, CTV, Global, Citytv, TSN, Sportsnet) and international channels from 100+ countries. All included in one subscription, no extra fees.', false, 3)}
+      ${buildFAQItem('Do I need IBO Player Pro to use IPTV in Montreal?', 'You do not strictly need it, but we recommend it. IBO Player Pro offers faster channel zapping, bilingual EPG support, and stable 4K playback that free players cannot match. It comes with a seven-day free trial, and you can buy the activation licence directly from us on WhatsApp if you decide to keep it.', false, 4)}
+    </div>
+
+    <h2>One Last Thing</h2>
+
+    <p>
+      Montreal is one of the best IPTV markets in Canada if you pick the right provider. The channel lineup is genuinely world-class, the savings versus cable are real, and the technology is stable enough for daily use. The trap is buying from the wrong place — a reseller without infrastructure, a site without a business identity, or a plan priced so low it can't possibly deliver.
+    </p>
+
+    <p>
+      If you want to skip the research and get set up quickly, message us on WhatsApp and mention you're in Montreal. We'll help you choose a plan, sell you an IBO Player Pro activation if you need one, and walk you through the whole setup so you're watching RDS and TVA Sports the same evening. Otherwise, browse our <a href="/pricing" class="internal-link">IPTV Canada plans</a> whenever you're ready. 🍁
+    </p>
+  `,
+},
+
+// =========================================================================
+// ARTICLE 6 — SETUP
+// IPTV on Roku Canada: Is It Even Possible in 2026?
+// =========================================================================
+{
+  id: "6",
+  slug: "iptv-on-roku-canada",
+  title: `IPTV on Roku Canada: Is It Even Possible in ${new Date().getFullYear()}?`,
+  description: `IPTV on Roku Canada explained honestly. No native app exists — here are the 3 proven workarounds using IBO Player Pro, AirPlay, Miracast and Castify.`,
+  excerpt: `Wondering if IPTV works on Roku in Canada? It does — but not the way you'd expect. Here are the 3 methods that actually work, plus the player we recommend for every one.`,
+  date: "2026-10-20",
+  author: "Jessica",
+  keywords: [
+    "iptv on roku canada",
+    "roku iptv canada",
+    "iptv roku",
+    "best iptv for roku",
+    "ibo player pro roku",
+    "iptv canada",
+    "best iptv canada",
+    "roku iptv setup",
+  ],
+  image: "/img/blog/article-06/cover.webp",
+  category: "setup",
+  readTime: "9 min read",
+  featured: false,
+  content: `
+    ${ARTICLE_STYLE_BLOCK}
+
+    <p>
+      If you've ever searched for an IPTV app on the Roku Channel Store, you already know the answer. It isn't there. You scroll past Netflix, Crave, Prime Video, and a dozen free ad-supported channels, but the IPTV players you've heard about — IPTV Smarters, TiviMate, IBO Player Pro — are nowhere to be found.
+    </p>
+
+    <p>
+      That's not you doing something wrong. It's Roku being Roku. The platform has always been the most locked-down of the major streaming devices in North America, and nothing has changed in ${new Date().getFullYear()}. Roku doesn't allow third-party IPTV players in its official channel store, full stop. So if you own a Roku and you want to use your IPTV Canada subscription on it, you need to think differently.
+    </p>
+
+    <p>
+      This guide walks through what actually works for Roku owners in Canada right now, what doesn't, and the three methods we've seen work reliably for real customers. Every one of them uses IBO Player Pro as the recommended player, because it's the app we ship with our subscriptions and the one that handles mirroring best. By the end, you'll know exactly which path fits your setup.
+    </p>
+
+    <img src="/img/blog/article-06/image-01.webp" alt="Roku streaming device connected to a Canadian TV for IPTV setup" class="article-image" />
+
+    <h2>Why There's No Native IPTV App on Roku</h2>
+
+    <p>
+      Let's get the technical explanation out of the way quickly. Roku controls what goes into its channel store, and its content policies don't allow third-party IPTV players. This isn't about legality — it's about platform control. Roku wants every experience on its device to go through its own distribution channel, and IPTV apps don't fit that model.
+    </p>
+
+    <p>
+      The practical consequence is simple: you cannot sideload an APK on a Roku the way you can on a Firestick. There's no developer mode that unlocks Android apps. The platform is closed, and no IPTV provider has found a legitimate way around that.
+    </p>
+
+    <p>
+      So the question isn't "which IPTV app should I install on Roku?" It's "how do I get my IPTV stream onto my Roku TV?" That's the question this article answers.
+    </p>
+
+    <h2>The 3 Methods That Actually Work for Roku in Canada</h2>
+
+    <p>
+      Every viable approach to IPTV on Roku comes down to screen mirroring — pushing the video from another device to your TV. The difference between methods is which device does the work and how smooth the connection feels.
+    </p>
+
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Best For</th>
+            <th>Roku Compatibility</th>
+            <th>Video Quality</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>AirPlay 2</td><td>iPhone &amp; iPad users</td><td>Most Roku devices from 2019+</td><td>Excellent</td></tr>
+          <tr><td>Miracast</td><td>Windows PC users</td><td>Roku Streaming Stick+ and newer</td><td>Good</td></tr>
+          <tr><td>Castify</td><td>Android users</td><td>All Roku devices</td><td>Decent</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Method 1 — AirPlay 2 for iPhone and iPad</h3>
+
+    <p>
+      If you're in the Apple ecosystem, this is the cleanest path. Many modern Roku devices support AirPlay 2, which lets you mirror your iPhone or iPad directly to your TV. The big advantage is that AirPlay is a native Apple protocol, so the connection is more stable than third-party casting apps.
+    </p>
+
+    <p>
+      The setup is quick. On your Roku, go to Settings, then Apple AirPlay and HomeKit, and confirm AirPlay is enabled. Install IBO Player Pro on your iPhone — it's available in the App Store and it comes with a free seven-day trial. Load your IPTV Canada credentials through Xtream Codes, and you'll have your full channel list ready. Then open Control Center on your iPhone, tap Screen Mirroring, and select your Roku.
+    </p>
+
+    <p>
+      One thing worth knowing: your iPhone needs to stay awake during playback. Adjust the auto-lock timer before starting a movie or a live game, or you'll lose the stream when the screen dims. Beyond that, AirPlay handles IPTV well. Channel changes are fast, the picture stays sharp on 1080p and 4K streams, and the audio syncs cleanly through the Roku's HDMI output.
+    </p>
+
+    <h3>Method 2 — Miracast for Windows PC</h3>
+
+    <p>
+      Windows users can mirror to Roku using Miracast, which is built into Windows 10 and 11. The connection isn't always as smooth as AirPlay, but once it's established, it's reliable enough for daily use.
+    </p>
+
+    <p>
+      On your Roku, go to Settings, then System, then Screen mirroring, and set it to Prompt. On your PC, press the Windows key and K together and select your Roku from the list. Open IBO Player Pro on your PC — the Windows version works with Xtream Codes just like the mobile apps — and load your playlist. Start any channel and hit fullscreen. It appears on your Roku within a second or two.
+    </p>
+
+    <p>
+      The advantage of using a PC is that you can browse channels, manage your EPG, and organize favourites on the computer while the TV stays on the current stream. If you're the kind of person who likes having the full interface in front of you, this method feels the most "native."
+    </p>
+
+    <img src="/img/blog/article-06/image-02.webp" alt="Screen mirroring IPTV from phone to Roku TV in Canada" class="article-image" />
+
+    <h3>Method 3 — Castify for Android Users</h3>
+
+    <p>
+      Android users need a third-party casting app. Castify is the one we recommend. It's available for Android, it handles M3U playlists and Xtream Codes, and it casts directly to Roku without needing a Chromecast-style dongle.
+    </p>
+
+    <p>
+      Install IBO Player Pro on your Android phone or tablet from the Google Play Store, load your IPTV Canada credentials, and confirm the channel list looks good. Then open Castify, select your Roku as the target, and mirror your screen. Castify gives you a built-in remote function on your phone, which is handy because you don't have to juggle the Roku remote while casting.
+    </p>
+
+    <p>
+      The free version of Castify is ad-supported, and there's a slight delay between your phone and the TV. If you use it often, the premium version removes ads and improves stability. For occasional use, the free version is fine.
+    </p>
+
+    <h2>Why We Recommend IBO Player Pro for Roku Mirroring</h2>
+
+    <p>
+      Since mirroring is the only real path to IPTV on Roku, the player you use on your phone or PC matters a lot. We recommend IBO Player Pro for a few practical reasons, and they hold up whether you're on iPhone, Android, or Windows.
+    </p>
+
+    <ul>
+      <li><strong>Rock-solid during mirroring.</strong> IBO Player Pro holds a stable video feed even when the mirroring connection has small hiccups, which is critical when you're adding an extra hop between your device and the TV.</li>
+      <li><strong>Fast channel zapping.</strong> Under a second between channels, even on high-bitrate 4K streams. That matters when you're surfing live sports.</li>
+      <li><strong>Seven-day free trial.</strong> You can test it with your IPTV Canada subscription before deciding whether to keep it.</li>
+      <li><strong>Xtream Codes support.</strong> The app logs in through Xtream Codes API, which is the fastest way to pull your full channel lineup and EPG.</li>
+      <li><strong>Cross-platform.</strong> The same app works on iOS, Android, and Windows — so if you switch devices later, you don't have to learn a new player.</li>
+    </ul>
+
+    <p>
+      One thing to be clear about: IBO Player Pro is a paid app with its own small subscription paid to the developer. It's not included with your IPTV Canada plan. But the free trial means you can try it risk-free, and in our experience, most customers stick with it once they see how smooth the mirroring experience is compared to free alternatives. If you want to buy an activation licence, message us on WhatsApp and we'll walk you through it in a couple of minutes.
+    </p>
+
+    <h2>What About Roku Media Player and Official Telecom IPTV?</h2>
+
+    <p>
+      Two other things come up when people ask about Roku and IPTV, so let's address both honestly.
+    </p>
+
+    <p>
+      Roku Media Player is a free channel that can sometimes play M3U files directly. In theory, this would let you load your playlist without casting. In practice, it's a poor experience. There's no EPG, no channel logos, no favourites, and many M3U links from real IPTV providers won't load because they expect a dedicated player. Treat it as a last resort for testing a single stream, not as a daily setup.
+    </p>
+
+    <p>
+      Official Canadian telecom IPTV services — like Freedom Mobile's TV package — do work on Roku. But those are closed systems. You're locked into their channel lineup, their pricing, and their terms. You can't load your own subscription into them. If your goal is to use an IPTV Canada subscription on your Roku, these services don't help.
+    </p>
+
+    <img src="/img/blog/article-06/image-03.webp" alt="IBO Player Pro used to stream IPTV on Roku Canada" class="article-image" />
+
+    <h2>Is Roku the Right Device for IPTV in Canada?</h2>
+
+    <p>
+      Honest answer: no, not really. If you're buying a device specifically for IPTV, a Firestick or Android box is a better choice. Both let you install IBO Player Pro natively, which means no casting, no second device running, and no delay. That's the setup most Canadian cord-cutters end up with, and it's the one we recommend in our <a href="/blog/how-to-install-iptv-firestick-canada" class="internal-link">Firestick setup guide</a>.
+    </p>
+
+    <p>
+      But if you already own a Roku and you don't want to buy another device, the mirroring methods above work fine. They're not the same as having a native app, but they get the job done for movie nights and hockey games.
+    </p>
+
+    <h2>What to Watch Out For</h2>
+
+    <p>
+      Provider stability matters more with mirroring than with a native app. Any weakness in your IPTV provider's servers gets amplified when you add a casting hop. Test with a free trial before committing, and if you want to know what a well-built Canadian provider looks like, our <a href="/blog/what-need-to-know-before-choosing-iptv-canada" class="internal-link">guide on choosing an IPTV Canada subscription</a> covers it in detail.
+    </p>
+
+    <p>
+      Network quality is critical too. Your Roku and your phone or PC need to be on the same Wi-Fi network, ideally on the 5GHz band. If your router is congested, or if one device is on 2.4GHz and the other on 5GHz, the stream will stutter. It's worth logging into your router and confirming both devices are on the same band.
+    </p>
+
+    <p>
+      Finally, don't expect perfect channel surfing. With mirroring, every channel change happens on your phone or PC and mirrors to the TV. It works, and with IBO Player Pro it's surprisingly snappy, but it's not the same instant feel as a native app on a Firestick.
+    </p>
+
+    <h2>You Can Absolutely Do This</h2>
+
+    <p>
+      IPTV on Roku in Canada is possible — it's just a workaround, not a native experience. Between AirPlay 2, Miracast, and Castify, every major device family has a viable path. And with IBO Player Pro running on the source device, the whole setup feels polished enough that most people forget they're mirroring at all.
+    </p>
+
+    <p>
+      If you want the fastest path from here to watching, message our team on WhatsApp and mention you're setting up on Roku. We'll send you IBO Player Pro activation details, help you load your IPTV Canada subscription, and confirm the mirroring is working before you sit down to watch. Or if you're still deciding which device is right for you, our <a href="/pricing" class="internal-link">IPTV Canada plans</a> page shows what every tier includes, and our <a href="/reviews" class="internal-link">verified customer reviews</a> show what real Canadians say after they've set it up. 🍁
+    </p>
+
+    <div class="faq-section-header">
+      <h2>Frequently Asked Questions</h2>
+      <span class="faq-section-badge">05 Questions</span>
+    </div>
+
+    <div class="faq-container">
+      ${buildFAQItem('Is there a native IPTV app for Roku in Canada?', 'No. Roku does not allow third-party IPTV players in its official channel store, in Canada or anywhere else. The only way to use an IPTV subscription on Roku is to screen mirror from another device, such as an iPhone with AirPlay 2 or an Android phone with Castify. IBO Player Pro on the source device gives the smoothest experience.', true, 0)}
+      ${buildFAQItem('Can I use IBO Player Pro directly on Roku?', 'No. IBO Player Pro is not available in the Roku channel store. However, it works perfectly on the device you mirror from — iPhone, iPad, Android phone, or Windows PC — and the mirrored stream appears on your Roku without any loss in quality. The free seven-day trial lets you test it before committing.', false, 1)}
+      ${buildFAQItem('What is the best Roku device for IPTV mirroring?', 'For AirPlay 2, any Roku released from 2019 onward works well, including the Roku Streaming Stick 4K, Roku Express 4K+, and Roku Ultra. For Miracast, the Roku Streaming Stick+ and newer are best. In general, a wired or 5GHz Wi-Fi connection on both the Roku and the source device keeps the stream smooth.', false, 2)}
+      ${buildFAQItem('Does IPTV buffering get worse when mirroring to Roku?', 'It can, because mirroring adds an extra hop between your provider and the TV. Provider stability matters more than ever in this setup. If your provider is solid and both devices are on the same Wi-Fi band, the stream stays smooth. If it buffers, check your provider first before assuming the mirroring is the problem.', false, 3)}
+      ${buildFAQItem('Is IPTV on Roku worth it, or should I buy a Firestick?', 'If you already own a Roku and don\'t want to buy another device, mirroring works fine. But if you\'re buying a device specifically for IPTV, a Firestick 4K Max is easier — you install IBO Player Pro natively, there\'s no casting lag, and the setup takes about five minutes. Our Firestick setup guide walks through the whole process.', false, 4)}
+    </div>
+
+    <h2>One Last Thing</h2>
+
+    <p>
+      Roku owners in Canada sometimes feel left out of the IPTV conversation. The truth is you're not. You just need the right approach, and the right player on the source device. IBO Player Pro handles the streaming side beautifully, and once your subscription is loaded, the mirroring becomes invisible. Set it up once, and it stays ready every evening.
+    </p>
+
+    <p>
+      If you'd rather skip the mirroring altogether and pick up a device that runs IPTV natively, take a look at our <a href="/pricing" class="internal-link">IPTV Canada plans</a>. Every tier works on any device you own, and our Canadian support team will help you get set up on whichever one you choose — Roku, Firestick, Smart TV, or anything else. 🍁
+    </p>
+  `,
+},
+
+
+// =========================================================================
+// ARTICLE 5 — TIPS
+// IPTV Buffering Fix Canada: 8 Proven Solutions (2026 Guide)
+// =========================================================================
+{
+  id: "5",
+  slug: "iptv-buffering-fix-canada",
+  title: `IPTV Buffering Fix Canada: 8 Proven Solutions (${new Date().getFullYear()} Guide)`,
+  description: `Stop IPTV buffering in Canada with 8 proven solutions. Test your speed, go wired, change DNS, and fix IPTV buffering on Firestick, Smart TV, and Android.`,
+  excerpt: `The IPTV buffering problem affects every Canadian streamer at some point. Here are 8 proven IPTV buffering solutions that actually work in ${new Date().getFullYear()}.`,
+  date: "2026-10-12",
+  author: "Jessica",
+  keywords: [
+    "iptv buffering fix canada",
+    "iptv buffering solutions",
+    "fix iptv buffering",
+    "iptv buffering problem",
+    "iptv buffering",
+    "stop iptv buffering canada",
+    "iptv canada",
+    "best iptv canada",
+  ],
+  image: "/img/blog/article-05/cover.webp",
+  category: "tips",
+  readTime: "9 min read",
+  featured: false,
+  content: `
+    ${ARTICLE_STYLE_BLOCK}
+
+    <p>
+      Your stream freezes during the third period of a Leafs game. The spinner appears every two minutes. You pay for 4K but watch a slideshow. If that sounds familiar, you are not alone. The IPTV buffering problem is the single biggest complaint among Canadian streamers, and it affects beginners and veterans alike.
+    </p>
+
+    <p>
+      Here is the part most people get wrong. Your IPTV provider is usually not the cause. Buffering almost always comes from your network, your device, or your internet provider. The good news is that almost every case is fixable from your couch, without a technician or a new subscription.
+    </p>
+
+    <p>
+      This guide walks through eight proven IPTV buffering solutions, ranked from easiest to most advanced. Most Canadian households solve the problem with Fix #1 or Fix #2. If you have already read our <a href="/blog/what-need-to-know-before-choosing-iptv-canada" class="internal-link">guide on choosing an IPTV Canada subscription</a>, you already know that server quality matters. This article is about what you can control on your side of the connection.
+    </p>
+
+    <h2>Why the IPTV Buffering Problem Happens</h2>
+      <img src="/img/blog/article-05/image-01.webp" alt="angry man from the problem of buffering iptv and try to find solution" class="article-image" />
+
+    <p>
+      When you watch a live stream, your player downloads small video chunks into a buffer. That buffer usually holds between five and fifteen seconds of content. If the next chunk does not arrive before the buffer empties, playback stops and the spinner appears. Live IPTV is harder to buffer than Netflix because it cannot pre-load minutes of video in advance. It has to stay real-time.
+    </p>
+
+    <p>
+      For 4K 60FPS, you need a consistent 25 to 30 Mbps with minimal packet jitter. A connection that briefly drops from 50 Mbps to 5 Mbps will cause more buffering than a stable 15 Mbps line. The problem usually lives in one of three places: the source (your provider's server), the path (your Wi-Fi, router, DNS, or ISP throttling), or the player (buffer settings, decoder, or device performance). Diagnose which layer is broken, and you will fix the buffering.
+    </p>
+
+    <h2>8 IPTV Buffering Solutions That Actually Work</h2>
+
+    <p>
+      These are ordered by impact. Try them one at a time, not all at once. That way you know which change fixed the problem, and you can repeat it if it comes back.
+    </p>
+
+    <h3>Solution 1 — Test the Real Speed on Your Streaming Device</h3>
+
+    <p>
+      Before you touch any settings, measure what your streaming device actually receives. Do not test on your phone in another room. Test on the Firestick, Smart TV, or Android box that is buffering. For smooth 4K you want at least 25 Mbps on that exact device. For HD, aim for 15 Mbps minimum. If your speed test shows 100 Mbps but the device only receives 8 Mbps, the problem is your Wi-Fi or router, not your internet plan.
+    </p>
+
+    <h3>Solution 2 — Go Wired (The 90% Fix)</h3>
+
+    <p>
+      Wi-Fi is fundamentally unstable for real-time streaming. Thick walls, neighbors' networks, microwaves, and Bluetooth devices cause micro-drops that are invisible for web browsing but fatal for live video. Ethernet eliminates all of it. If your device is near the router, plug in. If it is a Firestick, get a USB OTG adapter and a USB-to-Ethernet adapter for around fifteen to twenty dollars. This one change fixes most buffering complaints. Our <a href="/blog/how-to-install-iptv-firestick-canada" class="internal-link">Firestick IPTV setup guide</a> shows exactly which adapters work best in Canada.
+    </p>
+
+    <h3>Solution 3 — Change Your DNS to 1.1.1.1</h3>
+
+    <p>
+      Canadian ISPs often throttle DNS queries during high-traffic events. Every time your player fetches the next video chunk, it must resolve a domain name first. Slow DNS adds latency that compounds into buffering. Replace your router's DNS with Cloudflare (1.1.1.1 primary, 1.0.0.1 secondary) or Google (8.8.8.8 primary, 8.8.4.4 secondary). This reduces resolution time from roughly fifty milliseconds to under five. Change it in the router, not per-device, so every screen in the house benefits.
+    </p>
+
+    <h3>Solution 4 — Adjust Your IPTV Player's Buffer Settings</h3>
+
+    <p>
+      In IPTV Smarters Pro or TiviMate, find the buffer size setting and increase it to Medium or about five seconds. This gives the player a deeper queue to absorb temporary packet loss. Do not go overboard. Setting it to Very Large or beyond ten seconds can cause memory overflow on Firesticks and budget Android boxes, leading to crashes and worse performance than before. Also enable auto-reconnect if your app supports it, so the player resumes automatically when the network drops momentarily.
+    </p>
+
+    <h3>Solution 5 — Switch the Video Decoder</h3>
+
+    <p>
+      In IPTV Smarters Pro, open Player Settings and change the decoder from Hardware to Software, or vice versa. This fixes buffering that only happens on live channels or specific VOD titles. Hardware decoding uses the device's GPU; software uses the CPU. One often works when the other fails, depending on the codec and your hardware. Newer providers use H.265 (HEVC) compression, which cuts bitrate by up to fifty percent at the same visual quality. If your device supports it, enable it. It is far more efficient for 4K streams.
+    </p>
+
+    <h3>Solution 6 — Clear Cache and Restart Weekly</h3>
+
+    <p>
+      This sounds too simple to work, but it does, constantly. On Firestick, go to Settings, then Applications, then Manage Installed Applications, then IPTV Smarters Pro, then Force Stop, then Clear Cache. A full cache can corrupt stream handling, and clearing it resets the player's internal state. Also power-cycle your router every few weeks. Unplug it for thirty seconds, plug it back in, and let it rebuild the connection. Small habits, big difference.
+    </p>
+
+    <h3>Solution 7 — Use a VPN to Fix IPTV Buffering at Night</h3>
+      <img src="/img/blog/article-05/image-02.webp" alt="room with tv to explain the problem of buffering" class="article-image" />
+
+    <p>
+      If your buffering is time-based, meaning it only happens between 7 PM and 10 PM, your ISP is likely throttling streaming traffic using Deep Packet Inspection. Canadian ISPs like Bell, Rogers, and Videotron use DPI to identify and slow video traffic when networks get congested. A VPN encrypts your traffic so the ISP cannot tell it apart from normal browsing. WireGuard is the best protocol for streaming devices because it is lightweight and has low CPU overhead. Connect to a nearby server, usually Toronto or Montreal for Canadian users, and test again. Smart TVs rarely support native VPN apps, so a router-level VPN or an Android box is the better path.
+    </p>
+
+    <h3>Solution 8 — Reduce Your Playlist Size</h3>
+
+    <p>
+      If your app loads twenty thousand channels every time you open it, it processes a massive list before playback even starts. Request a filtered playlist from your provider with only the categories you actually watch. A lighter playlist means faster navigation, less memory use, and fewer freezes. Also close background apps on your streaming device. Gaming, video calls, and downloads consume the same bandwidth your IPTV stream needs. If you want to know what a well-optimised Canadian lineup should include, our <a href="/blog/best-iptv-providers-in-canada" class="internal-link">best IPTV providers comparison</a> breaks down the standard by category.
+    </p>
+
+    <h2>Bandwidth You Actually Need in Canada</h2>
+
+    <p>
+      Use this as your reference point when testing your connection. Remember that these numbers are per stream. If two people in your home watch 4K at the same time, you need double the figure.
+    </p>
+
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Quality</th>
+            <th>Minimum Speed</th>
+            <th>Recommended Speed</th>
+            <th>Best Connection</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>SD (480p)</td><td>3 Mbps</td><td>5 Mbps</td><td>Wi-Fi 5GHz</td></tr>
+          <tr><td>HD (720p)</td><td>5 Mbps</td><td>10 Mbps</td><td>Wi-Fi 5GHz</td></tr>
+          <tr><td>Full HD (1080p)</td><td>10 Mbps</td><td>15 to 25 Mbps</td><td>Ethernet preferred</td></tr>
+          <tr><td>4K (UHD)</td><td>25 Mbps</td><td>50 Mbps plus</td><td>Ethernet strongly advised</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Quick Diagnostic Summary</h2>
+
+    <p>
+      Match your symptom to the likely cause, then jump to the fix. This is the fastest way to resolve the IPTV buffering problem without guessing.
+    </p>
+
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Symptom</th>
+            <th>Likely Cause</th>
+            <th>First Fix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Buffers on all channels, all times</td><td>Weak Wi-Fi or slow connection</td><td>Solution 2 — Go Ethernet</td></tr>
+          <tr><td>Buffers only 7 PM to 10 PM</td><td>ISP throttling</td><td>Solution 7 — VPN</td></tr>
+          <tr><td>One player buffers, another does not</td><td>App settings</td><td>Solution 5 — Switch decoder</td></tr>
+          <tr><td>Buffers on specific channels only</td><td>Provider's stream</td><td>Message WhatsApp support</td></tr>
+          <tr><td>Works on 4G, fails on Wi-Fi</td><td>ISP filtering</td><td>Solution 3 — Change DNS</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>When It Is Your Provider's Fault</h2>
+
+    <p>
+      Not every case is fixable on your end. If you have tried all eight solutions and still buffer on every channel during peak hours, your provider's servers may be oversold. The warning signs are predictable. Buffering during big sports events when everyone is watching. Dead channels in the playlist. Slow or missing support responses. No trial option. If you are seeing two or more of these, you are probably with the wrong provider.
+    </p>
+
+    <p>
+      A well-built Canadian service passes the sports test. If a provider streams an NHL playoff game at 60FPS without a hiccup, they can handle anything. If you want to compare what real customers experience across the country, our <a href="/reviews" class="internal-link">verified Canadian customer reviews</a> page has honest feedback, including some critical comments worth reading before you switch.
+    </p>
+
+    <h2>Your One-Sentence IPTV Buffering Fix Canada Summary</h2>
+
+    <p>
+      Wire your device, change your DNS to 1.1.1.1, set the buffer to Medium, and if evenings still buffer, use a VPN. That combination fixes roughly ninety percent of Canadian IPTV buffering. If it does not, your provider is the bottleneck, and no amount of tuning on your end will help.
+    </p>
+
+      <img src="/img/blog/article-05/image-03.webp" alt="Canadian family happy with petter tv perfromonce and fix buffering iptv problem" class="article-image" />
+
+
+    <p>
+      For anyone who wants the full picture before subscribing, our <a href="/blog/is-iptv-safe-canada" class="internal-link">guide on IPTV safety in Canada</a> covers what to verify before paying. And if you would rather just watch, our <a href="/pricing" class="internal-link">IPTV Canada pricing plans</a> start at CA$50 with instant activation and 24/7 WhatsApp support for every buffering question you might have.
+    </p>
+
+    <div class="faq-section-header">
+      <h2>Frequently Asked Questions</h2>
+      <span class="faq-section-badge">05 Questions</span>
+    </div>
+
+    <div class="faq-container">
+      ${buildFAQItem('Why does my IPTV keep buffering in Canada?', 'Most IPTV buffering in Canada comes from three sources: weak Wi-Fi, ISP throttling during peak evening hours, or an undersized buffer on your player. Provider-side server congestion is the fourth cause, but it is far less common than people assume. Run through Solutions 1 and 2 first. If you still buffer, then test for ISP throttling with a VPN.', true, 0)}
+      ${buildFAQItem('Does a VPN actually fix IPTV buffering?', 'Yes, when the buffering is caused by ISP throttling. Canadian providers like Bell, Rogers, and Videotron use Deep Packet Inspection to slow streaming traffic during peak hours. A VPN encrypts your connection so the ISP cannot identify it as video. If your buffering only happens between 7 PM and 10 PM, a VPN is usually the single fastest fix.', false, 1)}
+      ${buildFAQItem('What internet speed do I need for IPTV in Canada?', 'For HD quality you need around 15 Mbps of stable speed. For 4K you need 25 to 30 Mbps per stream, with headroom for packet jitter. If two people watch 4K at the same time, you need 50 to 60 Mbps. Test on the streaming device itself, not on your phone, because Wi-Fi losses between rooms are often invisible until you stream live video.', false, 2)}
+      ${buildFAQItem('Why does IPTV buffer on Firestick but not on my phone?', 'Firesticks have weaker Wi-Fi antennas than phones, and they are often placed behind a TV where signal is already degraded. The same Wi-Fi that works on your phone in the living room can lose half its throughput behind a television. Ethernet through an OTG adapter solves this in most cases. Our Firestick setup guide walks through the exact adapters to use.', false, 3)}
+      ${buildFAQItem('Should I change my IPTV player to fix buffering?', 'If the buffering is caused by decoder or buffer settings, yes. Switching from Hardware to Software decoding, or adjusting the buffer to Medium, resolves a large category of playback issues. If the buffering is network-based, changing the player will not help. Diagnose the cause first using the Quick Diagnostic table in this article, then apply the matching fix.', false, 4)}
+    </div>
+
+    <h2>Our Honest Take</h2>
+
+    <p>
+      IPTV buffering is a solvable problem in almost every case. The mistake most Canadians make is assuming the provider is at fault and switching services, when the fix was sitting in their router settings the whole time. Work through the eight solutions in order, test after each change, and you will very likely find the culprit within an hour.
+    </p>
+
+    <p>
+      If you want a provider who builds their infrastructure around this exact problem, dedicated servers, anti-freeze load balancing, and Canadian support on WhatsApp seven days a week, take a look at our <a href="/pricing" class="internal-link">IPTV Canada plans</a>. Every tier includes priority routing during peak hours, which is where most budget services fall apart. And if you have already tried everything and still see buffering, message us on WhatsApp. We will tell you honestly whether it is your setup or ours. 🍁
+    </p>
+  `,
+},
+
+
+
 
     // =========================================================================
   // ARTICLE 4 — TRUST
@@ -1008,7 +1671,7 @@ export const blogPosts: BlogPost[] = [
       </p>
 
       <p>
-        Whenever you're ready to see how our service compares to the checklist above, our <a href="/blog/best-iptv-provider-canada-2026" class="internal-link">full guide to choosing an IPTV provider in Canada</a> goes even deeper into the technical side. And if you have a specific question that isn't covered here, message us on WhatsApp. We answer honestly, even when the answer isn't what you hoped to hear. 🍁
+        Whenever you're ready to see how our service compares to the checklist above, our <a href="/blog/best-iptv-providers-in-canada" class="internal-link">full guide to choosing an IPTV provider in Canada</a> goes even deeper into the technical side. And if you have a specific question that isn't covered here, message us on WhatsApp. We answer honestly, even when the answer isn't what you hoped to hear. 🍁
       </p>
     `,
   },
@@ -1104,7 +1767,7 @@ export const blogPosts: BlogPost[] = [
       </p>
 
       <p>
-        Once you've paid through Interac e-Transfer, credit card, PayPal, or crypto, your Xtream Codes credentials arrive within minutes. If you're brand new to IPTV and want a walkthrough of what to expect, our <a href="/blog/best-iptv-provider-canada-2026" class="internal-link">guide to choosing an IPTV provider in Canada</a> answers the questions most people ask before they commit.
+        Once you've paid through Interac e-Transfer, credit card, PayPal, or crypto, your Xtream Codes credentials arrive within minutes. If you're brand new to IPTV and want a walkthrough of what to expect, our <a href="/blog/best-iptv-providers-in-canada" class="internal-link">guide to choosing an IPTV provider in Canada</a> answers the questions most people ask before they commit.
       </p>
 
       <h2>Step 2 — Prepare Your Firestick for IPTV</h2>
@@ -1136,7 +1799,7 @@ export const blogPosts: BlogPost[] = [
       </p>
 
       <p>
-        Wondering how IBO Player Pro compares to TiviMate or IPTV Smarters Pro? We break down the differences in our <a href="/blog/iptv-canada-setup-guide-troubleshooting" class="internal-link">full IPTV Canada setup and troubleshooting guide</a>.
+        Wondering how IBO Player Pro compares to TiviMate or IPTV Smarters Pro? We break down the differences in our <a href="/blog/iptv-buffering-fix-canada" class="internal-link">full IPTV Canada setup and troubleshooting guide</a>.
       </p>
 
       <img src="/img/blog/article-01/image-2.webp" alt="IBO Player Pro installed on Amazon Firestick for IPTV Canada" class="article-image" />

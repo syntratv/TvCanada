@@ -19,7 +19,8 @@ import ArticleScrollSidebar from '../../components/ArticleScrollSidebar';
 
 type Props = { params: Promise<{ slug: string }> };
 
-const SITE_URL = `https://${CONSTANTS.DOMAIN}`;
+// ✅ MATCHES seo.ts — SITE_URL already includes https://
+const SITE_URL = CONSTANTS.SITE_URL;
 const BRAND = CONSTANTS.BRAND_NAME;
 
 const clampTitle = (s: string, max = 60): string =>
@@ -136,10 +137,15 @@ export async function generateMetadata({ params }: Props) {
   const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
 
   if (!post) {
-    return generateSEOMetadata('Article Not Found');
+    // ✅ MATCHES seo.ts signature: (pageName, description?, path?)
+    return generateSEOMetadata(
+      'Article Not Found',
+      'The article you are looking for could not be found.',
+      '/blog'
+    );
   }
 
-  const shortTitle = clampTitle(`${post.title}`);
+  const shortTitle = clampTitle(post.title);
   const description = clampDescription(
     post.description ||
       post.excerpt ||
@@ -147,13 +153,17 @@ export async function generateMetadata({ params }: Props) {
   );
 
   const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
-  const imageUrl = post.image.startsWith('http') ? post.image : `${SITE_URL}${post.image}`;
+  const imageUrl = post.image.startsWith('http')
+    ? post.image
+    : `${SITE_URL}${post.image}`;
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: { default: shortTitle, absolute: shortTitle },
+    title: { absolute: shortTitle },
     description,
-    keywords: post.keywords ? post.keywords.join(', ') : CONSTANTS.PRIMARY_KEYWORDS.join(', '),
+    keywords: post.keywords?.length
+      ? post.keywords.join(', ')
+      : `${CONSTANTS.FOCUS_KEYWORD}, ${CONSTANTS.SECONDARY_FOCUS_KEYWORD}`,
     authors: [{ name: post.author }],
     creator: post.author,
     publisher: BRAND,
@@ -170,7 +180,7 @@ export async function generateMetadata({ params }: Props) {
       description,
       url: canonicalUrl,
       siteName: BRAND,
-      locale: 'en_CA',
+      locale: CONSTANTS.LOCALE,
       type: 'article',
       publishedTime: post.date,
       modifiedTime: post.date,
@@ -210,7 +220,9 @@ export default async function BlogPostPage({ params }: Props) {
   const displayCategory = getCategoryLabel(post);
   const dateStr = formatDate(post.date);
   const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
-  const imageUrl = post.image.startsWith('http') ? post.image : `${SITE_URL}${post.image}`;
+  const imageUrl = post.image.startsWith('http')
+    ? post.image
+    : `${SITE_URL}${post.image}`;
 
   const safeContent = sanitizeContent(post.content);
   const faqs = extractFAQs(post.content);
@@ -223,9 +235,50 @@ export default async function BlogPostPage({ params }: Props) {
     `Hi ${BRAND}, I'd like to get an IPTV Canada subscription.`
   );
 
+  const authorId = `${SITE_URL}/#author-${post.author
+    .toLowerCase()
+    .replace(/\s+/g, '-')}`;
+
   const jsonLdGraph: any = {
     '@context': 'https://schema.org',
     '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: BRAND,
+        alternateName: BRAND,
+        url: SITE_URL,
+        logo: {
+          '@type': 'ImageObject',
+          '@id': `${SITE_URL}/#logo`,
+          url: `${SITE_URL}/img/iptv-logo.webp`,
+          contentUrl: `${SITE_URL}/img/iptv-logo.webp`,
+          width: 512,
+          height: 512,
+          caption: `${BRAND} Logo`,
+        },
+        email: CONSTANTS.CONTACT.email,
+        telephone: CONSTANTS.CONTACT.phone,
+        // ✅ MATCHES seo.ts — SOCIALS (with S) + safe fallback
+        sameAs: Object.values(CONSTANTS.SOCIALS ?? {}),
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: BRAND,
+        // ✅ MATCHES seo.ts — LANGUAGE (not LANG)
+        inLanguage: CONSTANTS.LANGUAGE,
+        publisher: { '@id': `${SITE_URL}/#organization` },
+      },
+      {
+        '@type': 'Person',
+        '@id': authorId,
+        name: post.author,
+        url: `${SITE_URL}/about`,
+        jobTitle: 'IPTV Canada Specialist',
+        worksFor: { '@id': `${SITE_URL}/#organization` },
+      },
       {
         '@type': 'BlogPosting',
         '@id': `${canonicalUrl}/#article`,
@@ -245,10 +298,11 @@ export default async function BlogPostPage({ params }: Props) {
         thumbnailUrl: imageUrl,
         datePublished: post.date,
         dateModified: post.date,
-        inLanguage: 'en-CA',
+        // ✅ MATCHES seo.ts
+        inLanguage: CONSTANTS.LANGUAGE,
         articleSection: displayCategory,
         wordCount: post.content.replace(/<[^>]*>/g, '').split(/\s+/).length,
-        author: { '@type': 'Person', name: post.author },
+        author: { '@id': authorId },
         publisher: { '@id': `${SITE_URL}/#organization` },
         mainEntityOfPage: { '@id': `${canonicalUrl}/#webpage` },
         isPartOf: { '@id': `${SITE_URL}/#website` },
@@ -259,7 +313,7 @@ export default async function BlogPostPage({ params }: Props) {
         url: canonicalUrl,
         name: post.title,
         description: post.description || post.excerpt,
-        inLanguage: 'en-CA',
+        inLanguage: CONSTANTS.LANGUAGE,
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
         primaryImageOfPage: { '@id': `${canonicalUrl}/#primaryimage` },
@@ -270,8 +324,18 @@ export default async function BlogPostPage({ params }: Props) {
         '@id': `${canonicalUrl}/#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
-          { '@type': 'ListItem', position: 3, name: post.title, item: canonicalUrl },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Blog',
+            item: `${SITE_URL}/blog`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.title,
+            item: canonicalUrl,
+          },
         ],
       },
     ],
@@ -291,7 +355,6 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <article className="flex flex-col min-h-screen bg-[#0a0a0c] text-[#FFFFFF]">
-
       <script
         type="application/ld+json"
         id="article-schema-data"
@@ -299,9 +362,7 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
       />
 
-      {/* ==========================================================
-          HERO — cleaner, taller, more cinematic
-      ========================================================== */}
+      {/* HERO */}
       <section className="relative min-h-[70vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden bg-[#0a0a0c]">
         <div className="absolute inset-0 z-0">
           <Image
@@ -327,8 +388,6 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#D32F2F]/12 blur-[150px] rounded-full pointer-events-none z-0" />
 
         <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 text-center relative z-10 pt-32 sm:pt-36 md:pt-40 pb-16 flex flex-col items-center justify-center">
-
-          {/* Category pill */}
           <div className="inline-flex items-center gap-2 bg-[#D32F2F] px-5 py-2.5 rounded-full mb-8 shadow-lg shadow-[#D32F2F]/30">
             <BookOpen className="w-4 h-4 text-[#FFFFFF]" />
             <span className="text-[#FFFFFF] text-xs font-black uppercase tracking-widest">
@@ -336,17 +395,14 @@ export default async function BlogPostPage({ params }: Props) {
             </span>
           </div>
 
-          {/* Title */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-[#FFFFFF] tracking-tighter uppercase mb-6 leading-[1.05] max-w-4xl">
             {post.title}
           </h1>
 
-          {/* Description */}
           <p className="text-base sm:text-lg md:text-xl text-[#FFFFFF]/75 font-bold max-w-3xl mx-auto leading-relaxed mb-10">
             {post.description || post.excerpt}
           </p>
 
-          {/* Meta chips */}
           <div className="flex flex-wrap justify-center items-center gap-3">
             <div className="inline-flex items-center gap-2 bg-white/[0.06] border border-white/10 backdrop-blur-md px-4 py-2 rounded-full text-[#FFFFFF] text-xs font-black uppercase tracking-widest">
               <Calendar className="w-3.5 h-3.5 text-[#D32F2F]" />
@@ -364,9 +420,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ==========================================================
-          BREADCRUMB
-      ========================================================== */}
+      {/* BREADCRUMB */}
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-10">
         <Link
           href="/blog"
@@ -377,15 +431,9 @@ export default async function BlogPostPage({ params }: Props) {
         </Link>
       </div>
 
-      {/* ==========================================================
-          MAIN GRID
-      ========================================================== */}
+      {/* MAIN GRID */}
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-        {/* Main content column */}
         <div className="lg:col-span-8 order-1 lg:order-1 space-y-10">
-
-          {/* Featured cover image — larger, cleaner */}
           <div className="relative w-full aspect-video rounded-3xl overflow-hidden border-4 border-[#D32F2F] shadow-[0_25px_60px_rgba(211,47,47,0.25)]">
             <Image
               src={post.image}
@@ -398,9 +446,7 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
           </div>
 
-          {/* Article body */}
           <div className="relative bg-[#f2ebeb] text-[#0a0a0c] rounded-3xl border-4 border-[#D32F2F] shadow-[0_25px_60px_rgba(10,10,12,0.15)] p-6 sm:p-8 md:p-12">
-            {/* Corner accent */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#D32F2F]/8 to-transparent rounded-bl-[4rem] pointer-events-none" />
 
             <div
@@ -423,10 +469,8 @@ export default async function BlogPostPage({ params }: Props) {
             />
           </div>
 
-          {/* Share buttons */}
           <ShareButtons title={`${post.title} - ${BRAND}`} url={canonicalUrl} />
 
-          {/* Topic keyword chips */}
           {post.keywords && post.keywords.length > 0 && (
             <div className="pt-2">
               <div className="flex items-center gap-2 mb-5">
@@ -448,7 +492,6 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           )}
 
-          {/* Author bio card — modernized */}
           <div className="relative overflow-hidden rounded-3xl border-4 border-[#D32F2F] bg-gradient-to-br from-[#f2ebeb] to-[#fff5f5] shadow-2xl p-6 md:p-8">
             <div className="absolute top-0 right-0 w-24 h-24 bg-[#D32F2F]/10 rounded-bl-[3rem] pointer-events-none" />
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 md:gap-6 text-center sm:text-left relative z-10">
@@ -479,7 +522,6 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Sidebar */}
         <ArticleScrollSidebar
           relatedPosts={relatedPosts}
           whatsappIboMsg={whatsappIboMsg}
@@ -487,9 +529,6 @@ export default async function BlogPostPage({ params }: Props) {
         />
       </div>
 
-      {/* ==========================================================
-          TRUST FOOTER
-      ========================================================== */}
       <div className="border-t border-white/5 mt-12 py-8 bg-[#0a0a0c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-[#FFFFFF]/60 text-xs font-black uppercase tracking-widest">

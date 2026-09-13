@@ -2,7 +2,8 @@
 import type { Metadata } from 'next';
 import { CONSTANTS } from '@/lib/seo';
 
-const SITE_URL = `https://${CONSTANTS.DOMAIN}`;
+// ✅ MATCHES seo.ts — SITE_URL already includes https://
+const SITE_URL = CONSTANTS.SITE_URL;
 const BRAND = CONSTANTS.BRAND_NAME;
 const YEAR = new Date().getFullYear();
 const PAGE_URL = `${SITE_URL}/reseller`;
@@ -13,27 +14,26 @@ const PAGE_URL = `${SITE_URL}/reseller`;
 const clampTitle = (s: string, max = 60): string =>
   s.length <= max ? s : s.slice(0, max - 1).trimEnd() + '…';
 
-const clampDescription = (s: string, max = 160): string =>
+const clampDescription = (s: string, max = 158): string =>
   s.length <= max ? s : s.slice(0, max - 3).trimEnd() + '...';
 
 // ---------------------------------------------------------------------------
-// SEO STRINGS — locked to 50-59 title / 120-130 description
+// SEO STRINGS — locked to safe SERP lengths
 // ---------------------------------------------------------------------------
-const PAGE_TITLE = clampTitle(`IPTV Reseller Canada | Start at US$300`); // 42 chars
+const PAGE_TITLE = clampTitle(
+  `IPTV Reseller Canada | Start at US$300 | ${BRAND}`
+);
 
 const PAGE_DESCRIPTION = clampDescription(
-  `Become an IPTV reseller in Canada from US$300. Buy credits, sell yearly at US$50-90, earn up to US$60 profit per sale. Instant panel access + 24/7 support.`
-); // 156 → trimmed to ~128
+  `Become an IPTV reseller in Canada from US$300. Buy wholesale credits, sell yearly at US$50–90, earn up to US$60 profit per sale. Instant panel access.`
+);
 
 // ---------------------------------------------------------------------------
 // METADATA
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: PAGE_TITLE,
-    absolute: PAGE_TITLE,
-  },
+  title: { absolute: PAGE_TITLE },
   description: PAGE_DESCRIPTION,
   keywords: [
     'iptv reseller canada',
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     description: PAGE_DESCRIPTION,
     url: PAGE_URL,
     siteName: BRAND,
-    locale: 'en_CA',
+    locale: CONSTANTS.LOCALE,
     type: 'website',
     images: [
       {
@@ -115,10 +115,27 @@ const ResellerSchema = () => {
         url: PAGE_URL,
         name: `IPTV Reseller Program Canada | ${BRAND}`,
         description: PAGE_DESCRIPTION,
-        inLanguage: 'en-CA',
+        // ✅ FIXED: LANG → LANGUAGE
+        inLanguage: CONSTANTS.LANGUAGE,
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
+        breadcrumb: { '@id': `${PAGE_URL}/#breadcrumb` },
+        primaryImageOfPage: { '@id': `${PAGE_URL}/#primaryimage` },
       },
+
+      // ---------------------------------------------------------
+      // PRIMARY IMAGE
+      // ---------------------------------------------------------
+      {
+        '@type': 'ImageObject',
+        '@id': `${PAGE_URL}/#primaryimage`,
+        url: `${SITE_URL}/img/blog/article-reseller/cover.webp`,
+        contentUrl: `${SITE_URL}/img/blog/article-reseller/cover.webp`,
+        width: 1200,
+        height: 630,
+        caption: `${BRAND} IPTV Reseller Program Canada ${YEAR}`,
+      },
+
       // ---------------------------------------------------------
       // BREADCRUMB
       // ---------------------------------------------------------
@@ -127,11 +144,17 @@ const ResellerSchema = () => {
         '@id': `${PAGE_URL}/#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Reseller Program', item: PAGE_URL },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Reseller Program',
+            item: PAGE_URL,
+          },
         ],
       },
+
       // ---------------------------------------------------------
-      // SERVICE — with 3 offers
+      // SERVICE — semantically correct for B2B offering
       // ---------------------------------------------------------
       {
         '@type': 'Service',
@@ -147,33 +170,65 @@ const ResellerSchema = () => {
         offers: [
           {
             '@type': 'Offer',
-            name: 'Starter Reseller Package (10 Years)',
+            name: 'Starter Reseller Package (10 Credits)',
             price: '300.00',
             priceCurrency: 'USD',
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
-            description: '10 reseller credits, full panel access, 24/7 WhatsApp support. Credits never expire.',
+            validFrom: new Date().toISOString().split('T')[0],
+            description:
+              '10 reseller credits, full panel access, 24/7 WhatsApp support. Credits never expire.',
           },
           {
             '@type': 'Offer',
-            name: 'Growth Reseller Package (20 Years)',
+            name: 'Growth Reseller Package (20 Credits)',
             price: '550.00',
             priceCurrency: 'USD',
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
-            description: '20 reseller credits, priority support, API access, credits never expire.',
+            validFrom: new Date().toISOString().split('T')[0],
+            description:
+              '20 reseller credits, priority support, API access, credits never expire.',
           },
           {
             '@type': 'Offer',
-            name: 'Pro Reseller Package (30 Years)',
+            name: 'Pro Reseller Package (30 Credits)',
             price: '750.00',
             priceCurrency: 'USD',
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
-            description: '30 reseller credits, dedicated support, white label option, full API access.',
+            validFrom: new Date().toISOString().split('T')[0],
+            description:
+              '30 reseller credits, dedicated support, white label option, full API access.',
           },
         ],
       },
+
+      // ---------------------------------------------------------
+      // PRODUCT + AGGREGATEOFFER — enables rich results
+      // ---------------------------------------------------------
+      {
+        '@type': 'Product',
+        '@id': `${PAGE_URL}/#product`,
+        name: `IPTV Reseller Program Canada`,
+        description: `Wholesale IPTV reseller credits for Canada. Buy in bulk, resell at your own price.`,
+        brand: {
+          '@type': 'Brand',
+          '@id': `${SITE_URL}/#brand`,
+          name: BRAND,
+        },
+        category: 'Business Service',
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'USD',
+          lowPrice: '300.00',
+          highPrice: '750.00',
+          offerCount: '3',
+          availability: 'https://schema.org/InStock',
+          url: PAGE_URL,
+        },
+      },
+
       // ---------------------------------------------------------
       // FAQ
       // ---------------------------------------------------------
