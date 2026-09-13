@@ -14,7 +14,7 @@ export interface Channel {
   genre?: string;
   description: string;
   whyWatch?: string;
-  country: CountryCode;   // ← now required
+  country?: CountryCode;  // ← optional again
   popular?: boolean;
 }
 

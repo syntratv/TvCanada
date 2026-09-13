@@ -466,7 +466,7 @@ export default async function ChannelCategoryPage({ params }: Props) {
                     </span>
                   )}
                 </div>
-                <CountryFlag country={channel.country} size="md" uid={`card-${idx}`} />
+                <CountryFlag country={channel.country ?? 'CA'} size="md" uid={`card-${idx}`} />
               </div>
 
               {/* Icon + Name */}
