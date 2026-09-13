@@ -158,7 +158,7 @@ export default function PricingSection() {
 
   const handleWhatsAppRedirect = (months: number) => {
     const selectedPrice = currentPricing[months as 3 | 6 | 12]?.total;
-    const message = `Hello ${CONSTANTS.BRAND_NAME}, I would like to order a ${months}-month subscription for ${devices} ${
+    const message = `Hello, I would like to order a ${months}-month subscription for ${devices} ${
       devices > 1 ? 'screens' : 'screen'
     } for CA$${selectedPrice}.`;
     const whatsappUrl = `${CONSTANTS.CONTACT.whatsappUrl}?text=${encodeURIComponent(message)}`;
@@ -166,7 +166,7 @@ export default function PricingSection() {
   };
 
   const handleFreeTrialRedirect = () => {
-    const message = `Hello ${CONSTANTS.BRAND_NAME}, I would like to request a free 24-hour trial period (IPTV Test) to test the channels.`;
+    const message = `Hello, I would like to request a free 24-hour trial period (Test) to test the service.`;
     const whatsappUrl = `${CONSTANTS.CONTACT.whatsappUrl}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };

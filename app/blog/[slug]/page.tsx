@@ -228,10 +228,10 @@ export default async function BlogPostPage({ params }: Props) {
   const relatedPosts = getRelatedPosts(post, blogPosts, 3);
 
   const whatsappIboMsg = encodeURIComponent(
-    `Hi ${BRAND}, I'd like to get IBO Player Pro access with my subscription.`
+    `Hi, I'd like to get IBO Player Pro access subscription.`
   );
   const whatsappSubMsg = encodeURIComponent(
-    `Hi ${BRAND}, I'd like to get an IPTV Canada subscription.`
+    `Hi, I'd like to get an IPTV Canada subscription.`
   );
 
   const authorId = `${SITE_URL}/#author-${post.author
