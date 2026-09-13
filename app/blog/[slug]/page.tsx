@@ -237,7 +237,7 @@ export default async function BlogPostPage({ params }: Props) {
     .toLowerCase()
     .replace(/\s+/g, '-')}`;
 
-  // CLEANED SCHEMA GRAPH SPECIFIC TO BLOG ARTICLES
+  // ISOLATED ARTICLE SCHEMA - NO DUPLICATED BRAND/ORGANIZATION OBJECTS
   const jsonLdGraph: any = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -247,11 +247,7 @@ export default async function BlogPostPage({ params }: Props) {
         name: post.author,
         url: `${SITE_URL}/about`,
         jobTitle: 'IPTV Canada Specialist',
-        worksFor: {
-          '@type': 'Organization',
-          name: BRAND,
-          url: SITE_URL,
-        },
+        worksFor: { '@id': `${SITE_URL}/#organization` },
       },
       {
         '@type': 'BlogPosting',
@@ -276,15 +272,7 @@ export default async function BlogPostPage({ params }: Props) {
         articleSection: displayCategory,
         wordCount: post.content.replace(/<[^>]*>/g, '').split(/\s+/).length,
         author: { '@id': authorId },
-        publisher: {
-          '@type': 'Organization',
-          name: BRAND,
-          url: SITE_URL,
-          logo: {
-            '@type': 'ImageObject',
-            url: `${SITE_URL}/img/iptv-logo.webp`,
-          },
-        },
+        publisher: { '@id': `${SITE_URL}/#organization` },
         mainEntityOfPage: { '@id': `${canonicalUrl}/#webpage` },
       },
       {
