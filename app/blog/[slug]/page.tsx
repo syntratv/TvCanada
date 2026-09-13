@@ -19,7 +19,6 @@ import ArticleScrollSidebar from '../../components/ArticleScrollSidebar';
 
 type Props = { params: Promise<{ slug: string }> };
 
-// ✅ MATCHES seo.ts — SITE_URL already includes https://
 const SITE_URL = CONSTANTS.SITE_URL;
 const BRAND = CONSTANTS.BRAND_NAME;
 
@@ -137,7 +136,6 @@ export async function generateMetadata({ params }: Props) {
   const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
 
   if (!post) {
-    // ✅ MATCHES seo.ts signature: (pageName, description?, path?)
     return generateSEOMetadata(
       'Article Not Found',
       'The article you are looking for could not be found.',
@@ -246,20 +244,10 @@ export default async function BlogPostPage({ params }: Props) {
         '@type': 'Organization',
         '@id': `${SITE_URL}/#organization`,
         name: BRAND,
-        alternateName: BRAND,
         url: SITE_URL,
-        logo: {
-          '@type': 'ImageObject',
-          '@id': `${SITE_URL}/#logo`,
-          url: `${SITE_URL}/img/iptv-logo.webp`,
-          contentUrl: `${SITE_URL}/img/iptv-logo.webp`,
-          width: 512,
-          height: 512,
-          caption: `${BRAND} Logo`,
-        },
+        logo: `${SITE_URL}/img/iptv-logo.webp`,
         email: CONSTANTS.CONTACT.email,
         telephone: CONSTANTS.CONTACT.phone,
-        // ✅ MATCHES seo.ts — SOCIALS (with S) + safe fallback
         sameAs: Object.values(CONSTANTS.SOCIALS ?? {}),
       },
       {
@@ -267,7 +255,6 @@ export default async function BlogPostPage({ params }: Props) {
         '@id': `${SITE_URL}/#website`,
         url: SITE_URL,
         name: BRAND,
-        // ✅ MATCHES seo.ts — LANGUAGE (not LANG)
         inLanguage: CONSTANTS.LANGUAGE,
         publisher: { '@id': `${SITE_URL}/#organization` },
       },
@@ -298,7 +285,6 @@ export default async function BlogPostPage({ params }: Props) {
         thumbnailUrl: imageUrl,
         datePublished: post.date,
         dateModified: post.date,
-        // ✅ MATCHES seo.ts
         inLanguage: CONSTANTS.LANGUAGE,
         articleSection: displayCategory,
         wordCount: post.content.replace(/<[^>]*>/g, '').split(/\s+/).length,
