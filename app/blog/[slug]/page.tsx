@@ -20,7 +20,7 @@ import ArticleScrollSidebar from '../../components/ArticleScrollSidebar';
 type Props = { params: Promise<{ slug: string }> };
 
 const SITE_URL = CONSTANTS.SITE_URL;
-const BRAND = CONSTANTS.BRAND_NAME;
+const BRAND = "IPTV Canada";
 
 const clampTitle = (s: string, max = 60): string =>
   s.length <= max ? s : s.slice(0, max - 1).trimEnd() + '…';
@@ -165,7 +165,7 @@ export async function generateMetadata({ params }: Props) {
       : `${CONSTANTS.FOCUS_KEYWORD}, ${CONSTANTS.SECONDARY_FOCUS_KEYWORD}`,
     authors: [{ name: post.author }],
     creator: post.author,
-    publisher: BRAND,
+    publisher: "Olivia",
     alternates: {
       canonical: canonicalUrl,
       languages: {
@@ -238,7 +238,7 @@ export default async function BlogPostPage({ params }: Props) {
     .toLowerCase()
     .replace(/\s+/g, '-')}`;
 
-  // ISOLATED ARTICLE SCHEMA - NO DUPLICATED BRAND/ORGANIZATION OR GLOBAL PRODUCT OBJECTS
+  // PURE ARTICLE JSON-LD (NO BRAND / PRODUCT SCHEMAS)
   const jsonLdGraph: any = {
     '@context': 'https://schema.org',
     '@graph': [
