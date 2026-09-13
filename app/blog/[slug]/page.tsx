@@ -1,5 +1,5 @@
 import { blogPosts } from '@/lib/blog';
-import { CONSTANTS, generateSEOMetadata } from '@/lib/seo';
+import { CONSTANTS } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -136,11 +136,12 @@ export async function generateMetadata({ params }: Props) {
   const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
 
   if (!post) {
-    return generateSEOMetadata(
-      'Article Not Found',
-      'The article you are looking for could not be found.',
-      '/blog'
-    );
+    const fallbackUrl = `${SITE_URL}/blog`;
+    return {
+      title: 'Article Not Found',
+      description: 'The article you are looking for could not be found.',
+      alternates: { canonical: fallbackUrl },
+    };
   }
 
   const shortTitle = clampTitle(post.title);
@@ -237,7 +238,7 @@ export default async function BlogPostPage({ params }: Props) {
     .toLowerCase()
     .replace(/\s+/g, '-')}`;
 
-  // ISOLATED ARTICLE SCHEMA - NO DUPLICATED BRAND/ORGANIZATION OBJECTS
+  // ISOLATED ARTICLE SCHEMA - NO DUPLICATED BRAND/ORGANIZATION OR GLOBAL PRODUCT OBJECTS
   const jsonLdGraph: any = {
     '@context': 'https://schema.org',
     '@graph': [
