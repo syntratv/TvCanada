@@ -39,12 +39,10 @@ const clampDescription = (s: string, max = 160): string =>
 // ---------------------------------------------------------------------------
 const BRAND = CONSTANTS.BRAND_NAME; // "IPTV Canada"
 
-// Title = 56 chars
 const SEO_TITLE = clampTitle(
   `${BRAND} | Premium 4K Ultra HD Streaming Service 2026`
 );
 
-// Meta description = 127 chars
 const SEO_DESCRIPTION = clampDescription(
   `Get ${BRAND} - 20,000+ live channels & VOD movies in 4K with anti-freeze servers. Watch live sports & premium TV instantly!`
 );
@@ -218,10 +216,7 @@ export const metadata: Metadata = {
 // UNIFIED JSON-LD SCHEMA
 // ---------------------------------------------------------------------------
 const CombinedSchema = () => {
-  // -------------------------------------------------------------------------
-  // Shared offer fields — applied to every Offer to satisfy Google's
-  // recommendations and prevent GSC warnings.
-  // -------------------------------------------------------------------------
+  // Shared offer properties to satisfy Google Rich Snippet compliance
   const sharedOfferFields = {
     priceCurrency: 'CAD',
     priceValidUntil: '2027-12-31',
@@ -232,10 +227,7 @@ const CombinedSchema = () => {
       '@type': 'MerchantReturnPolicy',
       applicableCountry: 'CA',
       returnPolicyCategory:
-        'https://schema.org/MerchantReturnFiniteReturnWindow',
-      merchantReturnDays: 7,
-      returnMethod: 'https://schema.org/ReturnByMail',
-      returnFees: 'https://schema.org/FreeReturn',
+        'https://schema.org/MerchantReturnNotPermitted',
     },
     shippingDetails: {
       '@type': 'OfferShippingDetails',
@@ -269,9 +261,7 @@ const CombinedSchema = () => {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
-      // ---------------------------------------------------------
       // ORGANIZATION
-      // ---------------------------------------------------------
       {
         '@type': 'Organization',
         '@id': `${SITE_URL}/#organization`,
@@ -297,9 +287,7 @@ const CombinedSchema = () => {
         ],
       },
 
-      // ---------------------------------------------------------
       // PRIMARY IMAGE
-      // ---------------------------------------------------------
       {
         '@type': 'ImageObject',
         '@id': `${SITE_URL}/#primaryimage`,
@@ -311,9 +299,7 @@ const CombinedSchema = () => {
         representativeOfPage: true,
       },
 
-      // ---------------------------------------------------------
       // WEBSITE
-      // ---------------------------------------------------------
       {
         '@type': 'WebSite',
         '@id': `${SITE_URL}/#website`,
@@ -324,9 +310,7 @@ const CombinedSchema = () => {
         inLanguage: 'en-CA',
       },
 
-      // ---------------------------------------------------------
       // WEBPAGE
-      // ---------------------------------------------------------
       {
         '@type': 'WebPage',
         '@id': `${SITE_URL}/#webpage`,
@@ -339,9 +323,7 @@ const CombinedSchema = () => {
         primaryImageOfPage: { '@id': `${SITE_URL}/#primaryimage` },
       },
 
-      // ---------------------------------------------------------
-      // PRODUCT — FIXED: brand is now a proper Brand object
-      // ---------------------------------------------------------
+      // PRODUCT - FIXED BRAND & MERCHANT PROPERTIES
       {
         '@type': 'Product',
         '@id': `${SITE_URL}/#product`,
@@ -353,7 +335,6 @@ const CombinedSchema = () => {
         brand: {
           '@type': 'Brand',
           name: BRAND,
-          url: SITE_URL,
         },
         aggregateRating: {
           '@type': 'AggregateRating',
@@ -408,9 +389,7 @@ const CombinedSchema = () => {
         ],
       },
 
-      // ---------------------------------------------------------
       // FAQ
-      // ---------------------------------------------------------
       {
         '@type': 'FAQPage',
         '@id': `${SITE_URL}/#faq`,

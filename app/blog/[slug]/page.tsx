@@ -72,7 +72,7 @@ function formatDate(dateStr: string): string {
 function sanitizeContent(html: string): string {
   return html
     .replace(/<h1(\s[^>]*)?>/gi, '<h2$1>')
-    .replace(/<\/h1>/gi, '</h2>');
+    .replace(/<\/h1>/gi, '<\/h2>');
 }
 
 function extractFAQs(html: string): { q: string; a: string }[] {
@@ -237,34 +237,21 @@ export default async function BlogPostPage({ params }: Props) {
     .toLowerCase()
     .replace(/\s+/g, '-')}`;
 
+  // CLEANED SCHEMA GRAPH SPECIFIC TO BLOG ARTICLES
   const jsonLdGraph: any = {
     '@context': 'https://schema.org',
     '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': `${SITE_URL}/#organization`,
-        name: BRAND,
-        url: SITE_URL,
-        logo: `${SITE_URL}/img/iptv-logo.webp`,
-        email: CONSTANTS.CONTACT.email,
-        telephone: CONSTANTS.CONTACT.phone,
-        sameAs: Object.values(CONSTANTS.SOCIALS ?? {}),
-      },
-      {
-        '@type': 'WebSite',
-        '@id': `${SITE_URL}/#website`,
-        url: SITE_URL,
-        name: BRAND,
-        inLanguage: CONSTANTS.LANGUAGE,
-        publisher: { '@id': `${SITE_URL}/#organization` },
-      },
       {
         '@type': 'Person',
         '@id': authorId,
         name: post.author,
         url: `${SITE_URL}/about`,
         jobTitle: 'IPTV Canada Specialist',
-        worksFor: { '@id': `${SITE_URL}/#organization` },
+        worksFor: {
+          '@type': 'Organization',
+          name: BRAND,
+          url: SITE_URL,
+        },
       },
       {
         '@type': 'BlogPosting',
@@ -289,9 +276,16 @@ export default async function BlogPostPage({ params }: Props) {
         articleSection: displayCategory,
         wordCount: post.content.replace(/<[^>]*>/g, '').split(/\s+/).length,
         author: { '@id': authorId },
-        publisher: { '@id': `${SITE_URL}/#organization` },
+        publisher: {
+          '@type': 'Organization',
+          name: BRAND,
+          url: SITE_URL,
+          logo: {
+            '@type': 'ImageObject',
+            url: `${SITE_URL}/img/iptv-logo.webp`,
+          },
+        },
         mainEntityOfPage: { '@id': `${canonicalUrl}/#webpage` },
-        isPartOf: { '@id': `${SITE_URL}/#website` },
       },
       {
         '@type': 'WebPage',
@@ -300,8 +294,6 @@ export default async function BlogPostPage({ params }: Props) {
         name: post.title,
         description: post.description || post.excerpt,
         inLanguage: CONSTANTS.LANGUAGE,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
         primaryImageOfPage: { '@id': `${canonicalUrl}/#primaryimage` },
         breadcrumb: { '@id': `${canonicalUrl}/#breadcrumb` },
       },
