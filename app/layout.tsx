@@ -354,7 +354,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="relative z-10">{children}</main>
         <Footer />
 
-        <GoogleAnalytics gaId="G-6NR51QZXKL" />
+        <GoogleAnalytics gaId="G-XKHJ5EK4VW" />
         <FloatingWhatsApp />
       </body>
     </html>
