@@ -307,19 +307,20 @@ export const ARTICLE_STYLE_BLOCK = `
 export const buildFAQItem = (
   q: string,
   a: string,
-  highlighted: boolean = false
-): string => `
-  <div class="w-full text-left bg-[#f2ebeb] border-4 border-[#D32F2F] rounded-2xl p-6 shadow-md">
-    <h3 class="text-lg md:text-xl font-black uppercase tracking-tight ${highlighted ? 'text-[#D32F2F]' : 'text-[#0a0a0c]'} flex items-center gap-3" style="margin: 0;">
-      <span class="${highlighted ? 'text-[#D32F2F]' : 'text-[#0a0a0c]/30'} font-black text-2xl">Q.</span>
-      ${q}
-    </h3>
-    <p class="text-[#0a0a0c]/80 font-bold leading-relaxed pl-6 md:pl-8 border-l-4 border-[#D32F2F] py-1 mt-4" style="margin-bottom: 0;">
-      ${a}
-    </p>
+  highlighted: boolean = false,
+  index: number = 0
+): string => {
+  const num = String(index + 1).padStart(2, '0');
+  return `
+  <div class="faq-card${highlighted ? ' faq-card-highlight' : ''}">
+    <div class="faq-number">${num}</div>
+    <div class="faq-content">
+      <h3 class="faq-question">${q}</h3>
+      <p class="faq-answer">${a}</p>
+    </div>
   </div>
 `;
-
+};
 // ---------------------------------------------------------------------------
 // BLOG POSTS — 8 ARTICLES
 // ---------------------------------------------------------------------------
