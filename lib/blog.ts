@@ -338,7 +338,7 @@ export const blogPosts: BlogPost[] = [
   description: `Where to buy IPTV in Montreal safely — ranked providers, RDS & TVA channel coverage, CAD pricing, and how to avoid scams before you pay in ${new Date().getFullYear()}.`,
   excerpt: `Looking for where to buy IPTV in Montreal? Here are the providers worth your money, the ones to avoid, and how to set up IBO Player Pro in under five minutes.`,
   date: "2026-11-08",
-  author: "Jessica",
+  author: "Olivia",
   keywords: [
     "where to buy iptv montreal",
     "iptv montreal",
@@ -573,7 +573,7 @@ export const blogPosts: BlogPost[] = [
   description: `IPTV on Roku Canada explained honestly. No native app exists — here are the 3 proven workarounds using IBO Player Pro, AirPlay, Miracast and Castify.`,
   excerpt: `Wondering if IPTV works on Roku in Canada? It does — but not the way you'd expect. Here are the 3 methods that actually work, plus the player we recommend for every one.`,
   date: "2026-10-20",
-  author: "Jessica",
+  author: "Olivia",
   keywords: [
     "iptv on roku canada",
     "roku iptv canada",
@@ -792,7 +792,7 @@ export const blogPosts: BlogPost[] = [
   description: `Stop IPTV buffering in Canada with 8 proven solutions. Test your speed, go wired, change DNS, and fix IPTV buffering on Firestick, Smart TV, and Android.`,
   excerpt: `The IPTV buffering problem affects every Canadian streamer at some point. Here are 8 proven IPTV buffering solutions that actually work in ${new Date().getFullYear()}.`,
   date: "2026-10-12",
-  author: "Jessica",
+  author: "Olivia",
   keywords: [
     "iptv buffering fix canada",
     "iptv buffering solutions",
@@ -1000,7 +1000,7 @@ export const blogPosts: BlogPost[] = [
     description: `Is IPTV safe in Canada? Here are the 7 safety checks every Canadian should run before paying, plus the real risks of unauthorized providers and how to avoid them.`,
     excerpt: `Worried about IPTV safety? Learn the 7 verification steps every Canadian should run before subscribing, from malware risks to payment security and legitimate provider checks.`,
     date: "2026-10-05",
-    author: "Jessica",
+    author: "Olivia",
     keywords: [
       "is iptv safe",
       "iptv safe canada",
@@ -1212,7 +1212,7 @@ export const blogPosts: BlogPost[] = [
     description: `Looking for the best IPTV providers in Canada for ${new Date().getFullYear()}? We compare server quality, channels, CAD pricing, and support across the top options.`,
     excerpt: `The honest comparison of the best IPTV providers in Canada for ${new Date().getFullYear()}. What to look for, what to avoid, and how the leading options stack up.`,
     date: "2026-09-28",
-    author: "Jessica",
+    author: "Olivia",
     keywords: [
       "best iptv providers in canada",
       "best iptv canada",
@@ -1462,7 +1462,7 @@ export const blogPosts: BlogPost[] = [
     description: "Before you buy IPTV Canada, here are the 7 things that matter most. Server quality, real 4K, hidden fees, and what to avoid in 2026.",
     excerpt: "Choosing an IPTV Canada subscription can feel overwhelming. Here is what actually matters before you pay, from server quality to hidden fees and device compatibility.",
     date: "2026-09-20",
-    author: "Jessica",
+    author: "Olivia",
     keywords: [
       "iptv canada subscription",
       "choose iptv canada",
@@ -1688,7 +1688,7 @@ export const blogPosts: BlogPost[] = [
     description: "Install IPTV on Firestick Canada in 5 easy steps. Setup IBO Player Pro, activate 4K streaming, and stream 30,000+ channels in 5 minutes.",
     excerpt: "Learn how to install IPTV on Firestick in Canada with our easy 5-minute step guide. IBO Player Pro setup, Xtream Codes login, and buffer-free 4K streaming.",
     date: "2026-09-12",
-    author: "Jessica",
+    author: "Olivia",
     keywords: [
       "how to install iptv on firestick canada",
       "setup iptv on firestick",
