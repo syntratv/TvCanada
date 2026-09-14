@@ -1,3 +1,4 @@
+// app/blog/[slug]/page.tsx
 import { blogPosts } from '@/lib/blog';
 import { CONSTANTS } from '@/lib/seo';
 import { notFound } from 'next/navigation';
@@ -165,7 +166,7 @@ export async function generateMetadata({ params }: Props) {
       : `${CONSTANTS.FOCUS_KEYWORD}, ${CONSTANTS.SECONDARY_FOCUS_KEYWORD}`,
     authors: [{ name: post.author }],
     creator: post.author,
-    publisher: "Olivia",
+    publisher: BRAND, // FIX: Dynamic publisher branding
     alternates: {
       canonical: canonicalUrl,
       languages: {
@@ -238,7 +239,7 @@ export default async function BlogPostPage({ params }: Props) {
     .toLowerCase()
     .replace(/\s+/g, '-')}`;
 
-  // PURE ARTICLE JSON-LD (NO BRAND / PRODUCT SCHEMAS)
+  // ENHANCED ARTICLE JSON-LD GRAPH
   const jsonLdGraph: any = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -275,6 +276,7 @@ export default async function BlogPostPage({ params }: Props) {
         author: { '@id': authorId },
         publisher: { '@id': `${SITE_URL}/#organization` },
         mainEntityOfPage: { '@id': `${canonicalUrl}/#webpage` },
+        isPartOf: { '@id': `${canonicalUrl}/#webpage` },
       },
       {
         '@type': 'WebPage',
@@ -447,7 +449,7 @@ export default async function BlogPostPage({ params }: Props) {
                 </h2>
               </div>
               <div className="flex flex-wrap gap-2.5">
-                {post.keywords.slice(0, 8).map((keyword) => (
+                {post.keywords.slice(0, 8).map((keyword: string) => (
                   <span
                     key={keyword}
                     className="px-4 py-2 bg-[#f2ebeb] text-[#0a0a0c] text-xs md:text-sm font-black uppercase tracking-wider rounded-full border-2 border-[#D32F2F] shadow-md hover:bg-[#D32F2F] hover:text-[#FFFFFF] hover:scale-105 transition-all cursor-default"
@@ -510,7 +512,7 @@ export default async function BlogPostPage({ params }: Props) {
             </span>
           </div>
           <p className="text-center text-[#FFFFFF]/40 text-xs mt-6 font-bold">
-            © {new Date().getFullYear()} {BRAND}. All rights reserved. Made in Canada 🍁
+            © 2026 {BRAND}. All rights reserved. Made in Canada 🍁
           </p>
         </div>
       </div>

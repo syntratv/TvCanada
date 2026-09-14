@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { CONSTANTS } from '@/lib/seo';
+import { ProductSchema, FAQSchema } from './components/PageSchemas';
 import { blogPosts } from '@/lib/blog';
 import { 
   PlayCircle,
@@ -92,7 +93,8 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0a0a0c] text-slate-100 overflow-hidden">
-      
+      <ProductSchema />
+      <FAQSchema />
 
     {/* Hero Section */}
     <section className="relative px-6 py-24 md:py-40 overflow-hidden flex flex-col items-center justify-center text-center min-h-screen w-full bg-[#08080A]">

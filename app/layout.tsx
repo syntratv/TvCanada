@@ -53,36 +53,6 @@ const SEO_TWITTER_TITLE = clampTitle(SEO_TITLE, 70);
 const SEO_TWITTER_DESCRIPTION = clampDescription(SEO_DESCRIPTION, 200);
 
 // ---------------------------------------------------------------------------
-// FAQ DATA
-// ---------------------------------------------------------------------------
-const FAQ_DATA = [
-  {
-    q: 'What is IPTV and how does it work?',
-    a: `IPTV stands for Internet Protocol Television. It allows you to stream live TV channels, sports, and on-demand movies over your internet connection rather than traditional cable or satellite. With ${BRAND}, you can stream directly in 4K resolution on your favourite Smart TV or mobile devices.`,
-  },
-  {
-    q: `What makes ${BRAND} the top IPTV provider in Canada?`,
-    a: `${BRAND} delivers maximum streaming stability with over 20,000 live channels and 60,000+ movies & TV series. Powered by anti-freeze server technology, you can enjoy live sports, news, and entertainment programmes in Ultra HD without buffering or interruptions.`,
-  },
-  {
-    q: 'Which devices are compatible with your IPTV service?',
-    a: 'Our IPTV service is compatible with virtually any streaming device: Samsung & LG Smart TVs, Android TV, Google TV, Amazon Firestick, Apple TV, iPhone, iPad, Windows PC, Mac, as well as MAG and Formuler set-top boxes.',
-  },
-  {
-    q: 'How fast is my IPTV subscription activated?',
-    a: 'Instantly after completing your order, your M3U playlist link and Xtream Codes credentials are generated automatically. You will receive your login details within 5 minutes via WhatsApp and email, complete with step-by-step setup instructions.',
-  },
-  {
-    q: 'Can I request a free 24-hour IPTV trial first?',
-    a: 'Yes, absolutely! You can contact us directly via WhatsApp on our website to request a free, no-obligation 24-hour trial to test our 4K channel quality, customised playlists, and server stability firsthand.',
-  },
-  {
-    q: 'How do I install the IPTV app on my Smart TV?',
-    a: 'Simply download an officially supported IPTV app such as IBO Player, TiviMate, Smart IPTV, or IPTV Smarters from your TV app store. Enter your M3U playlist URL or Xtream Codes credentials to start watching immediately.',
-  },
-];
-
-// ---------------------------------------------------------------------------
 // VIEWPORT
 // ---------------------------------------------------------------------------
 export const viewport: Viewport = {
@@ -213,64 +183,24 @@ export const metadata: Metadata = {
 };
 
 // ---------------------------------------------------------------------------
-// UNIFIED JSON-LD SCHEMA
+// SITE-WIDE SCHEMAS ONLY
 // ---------------------------------------------------------------------------
-const CombinedSchema = () => {
-  // Shared offer properties to satisfy Google Rich Snippet compliance
-  const sharedOfferFields = {
-    priceCurrency: 'CAD',
-    priceValidUntil: '2027-12-31',
-    validFrom: '2026-01-01',
-    availability: 'https://schema.org/InStock',
-    url: `${SITE_URL}/pricing`,
-    hasMerchantReturnPolicy: {
-      '@type': 'MerchantReturnPolicy',
-      applicableCountry: 'CA',
-      returnPolicyCategory:
-        'https://schema.org/MerchantReturnNotPermitted',
-    },
-    shippingDetails: {
-      '@type': 'OfferShippingDetails',
-      shippingRate: {
-        '@type': 'MonetaryAmount',
-        value: '0',
-        currency: 'CAD',
-      },
-      shippingDestination: {
-        '@type': 'DefinedRegion',
-        addressCountry: 'CA',
-      },
-      deliveryTime: {
-        '@type': 'ShippingDeliveryTime',
-        handlingTime: {
-          '@type': 'QuantitativeValue',
-          minValue: 0,
-          maxValue: 0,
-          unitCode: 'DAY',
-        },
-        transitTime: {
-          '@type': 'QuantitativeValue',
-          minValue: 0,
-          maxValue: 0,
-          unitCode: 'DAY',
-        },
-      },
-    },
-  };
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      // ORGANIZATION
-      {
+const OrganizationSchema = () => (
+  <script
+    type="application/ld+json"
+    id="organization-schema"
+    suppressHydrationWarning
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        '@context': 'https://schema.org',
         '@type': 'Organization',
         '@id': `${SITE_URL}/#organization`,
         name: BRAND,
         alternateName: `${BRAND} Streaming`,
         url: SITE_URL,
         logo: `${SITE_URL}/img/iptv-logo.webp`,
-        image: { '@id': `${SITE_URL}/#primaryimage` },
-        description: `${BRAND} is Canada's leading IPTV provider offering over 20,000 live channels and 60,000+ VOD titles in 4K Ultra HD with zero buffering.`,
+        image: `${SITE_URL}/img/structer.webp`,
+        description: `${BRAND} is Canada's leading IPTV provider offering over 20,000 live channels and 60,000+ VOD titles in 4K Ultra HD.`,
         contactPoint: {
           '@type': 'ContactPoint',
           telephone: CONSTANTS.CONTACT.phone,
@@ -285,22 +215,19 @@ const CombinedSchema = () => {
           CONSTANTS.SOCIALS.instagram,
           CONSTANTS.SOCIALS.facebook,
         ],
-      },
+      }),
+    }}
+  />
+);
 
-      // PRIMARY IMAGE
-      {
-        '@type': 'ImageObject',
-        '@id': `${SITE_URL}/#primaryimage`,
-        url: `${SITE_URL}/img/structer.webp`,
-        contentUrl: `${SITE_URL}/img/structer.webp`,
-        width: { '@type': 'QuantitativeValue', value: 1200 },
-        height: { '@type': 'QuantitativeValue', value: 630 },
-        caption: `${BRAND} - 4K Ultra HD Streaming Service`,
-        representativeOfPage: true,
-      },
-
-      // WEBSITE
-      {
+const WebSiteSchema = () => (
+  <script
+    type="application/ld+json"
+    id="website-schema"
+    suppressHydrationWarning
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        '@context': 'https://schema.org',
         '@type': 'WebSite',
         '@id': `${SITE_URL}/#website`,
         url: SITE_URL,
@@ -308,113 +235,10 @@ const CombinedSchema = () => {
         alternateName: `${BRAND} - Premium 4K HD Streaming Service`,
         publisher: { '@id': `${SITE_URL}/#organization` },
         inLanguage: 'en-CA',
-      },
-
-      // WEBPAGE
-      {
-        '@type': 'WebPage',
-        '@id': `${SITE_URL}/#webpage`,
-        url: SITE_URL,
-        name: SEO_TITLE,
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
-        description: SEO_DESCRIPTION,
-        inLanguage: 'en-CA',
-        primaryImageOfPage: { '@id': `${SITE_URL}/#primaryimage` },
-      },
-
-      // PRODUCT - FIXED BRAND & MERCHANT PROPERTIES
-      {
-        '@type': 'Product',
-        '@id': `${SITE_URL}/#product`,
-        name: `${BRAND} Premium Subscription`,
-        image: { '@id': `${SITE_URL}/#primaryimage` },
-        description: `${BRAND} delivers premium 4K live TV and on-demand media across Canada with 99.9% server uptime and instant 5-minute activation.`,
-        sku: 'IPTV-CA-PREMIUM',
-        category: 'Streaming Service',
-        brand: {
-          '@type': 'Brand',
-          name: BRAND,
-        },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: '2500',
-          bestRating: '5',
-          worstRating: '1',
-        },
-        offers: [
-          {
-            '@type': 'Offer',
-            name: '1 Screen - 3 Months',
-            price: '50.00',
-            ...sharedOfferFields,
-          },
-          {
-            '@type': 'Offer',
-            name: '1 Screen - 6 Months',
-            price: '75.00',
-            ...sharedOfferFields,
-          },
-          {
-            '@type': 'Offer',
-            name: '1 Screen - 12 Months',
-            price: '99.00',
-            ...sharedOfferFields,
-          },
-          {
-            '@type': 'Offer',
-            name: '2 Screens - 6 Months',
-            price: '115.00',
-            ...sharedOfferFields,
-          },
-          {
-            '@type': 'Offer',
-            name: '2 Screens - 12 Months',
-            price: '175.00',
-            ...sharedOfferFields,
-          },
-          {
-            '@type': 'Offer',
-            name: '3 Screens - 6 Months',
-            price: '150.00',
-            ...sharedOfferFields,
-          },
-          {
-            '@type': 'Offer',
-            name: '3 Screens - 12 Months',
-            price: '250.00',
-            ...sharedOfferFields,
-          },
-        ],
-      },
-
-      // FAQ
-      {
-        '@type': 'FAQPage',
-        '@id': `${SITE_URL}/#faq`,
-        isPartOf: { '@id': `${SITE_URL}/#webpage` },
-        mainEntity: FAQ_DATA.map((faq) => ({
-          '@type': 'Question',
-          name: faq.q,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: faq.a,
-          },
-        })),
-      },
-    ],
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      id="unified-schema"
-      suppressHydrationWarning
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
-};
+      }),
+    }}
+  />
+);
 
 // ---------------------------------------------------------------------------
 // ROOT LAYOUT
@@ -438,7 +262,8 @@ export default function RootLayout({
         className={`${poppins.className} ${montserrat.variable} antialiased min-h-screen bg-[#0a0a0c] text-[#f2ebeb] selection:bg-[#D32F2F] selection:text-white`}
         suppressHydrationWarning
       >
-        <CombinedSchema />
+        <OrganizationSchema />
+        <WebSiteSchema />
 
         <Loading />
         <Header />

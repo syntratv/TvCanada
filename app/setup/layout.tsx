@@ -11,20 +11,20 @@ const clampTitle = (s: string, max = 60): string =>
 const clampDescription = (s: string, max = 160): string =>
   s.length <= max ? s : s.slice(0, max - 3).trimEnd() + '...';
 
-const SITE_URL = `https://${CONSTANTS.DOMAIN}`;
+const SITE_URL = CONSTANTS.SITE_URL;
 const BRAND = CONSTANTS.BRAND_NAME;
 const PAGE_URL = `${SITE_URL}/setup`;
 
 // ---------------------------------------------------------------------------
-// SEO STRINGS — locked (Title 50–59, Desc 120–130, no duplicates)
+// SEO STRINGS — Locked (Title 50–59, Desc 120–130)
 // ---------------------------------------------------------------------------
 const PAGE_TITLE = clampTitle(
   `Setup Guide | ${BRAND} Firestick, Smart TV & Mobile`
-); // = 53 chars ✅
+);
 
 const PAGE_DESCRIPTION = clampDescription(
   `IPTV Canada setup guide for Firestick, Smart TV, Android & iOS. Install IBO Player Pro in 10 min with free WhatsApp support.`
-); // = 127 chars ✅
+);
 
 // ---------------------------------------------------------------------------
 // METADATA
@@ -33,7 +33,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: PAGE_TITLE,
-    // Prevent parent template from appending "| IPTV Canada" — no duplicate
     absolute: PAGE_TITLE,
   },
   description: PAGE_DESCRIPTION,
@@ -69,7 +68,7 @@ export const metadata: Metadata = {
     description: PAGE_DESCRIPTION,
     url: PAGE_URL,
     siteName: BRAND,
-    locale: 'en_CA',
+    locale: CONSTANTS.LOCALE,
     type: 'website',
     images: [
       {
@@ -107,15 +106,22 @@ export const metadata: Metadata = {
 };
 
 // ---------------------------------------------------------------------------
-// JSON-LD SCHEMA — HowTo + FAQPage in a single @graph
+// JSON-LD SCHEMA — HowTo + FAQPage + Breadcrumbs (Pure Informational)
 // ---------------------------------------------------------------------------
 const SetupPageSchema = () => {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
-      // ---------------------------------------------------------
-      // HOW TO — Google rich result for setup guide
-      // ---------------------------------------------------------
+      // BRAND ENTITY
+      {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: BRAND,
+        url: SITE_URL,
+        logo: `${SITE_URL}/img/iptv-logo.webp`,
+      },
+
+      // HOW TO SCHEMA
       {
         '@type': 'HowTo',
         '@id': `${PAGE_URL}/#howto`,
@@ -170,7 +176,7 @@ const SetupPageSchema = () => {
             position: 2,
             name: 'Contact Support on WhatsApp',
             text: 'Message our Canadian support team on WhatsApp. We confirm pricing in CAD, send a secure payment link, and provide your credentials.',
-            url: CONSTANTS.CONTACT.whatsappUrl,
+            url: CONSTANTS.CONTACT?.whatsappUrl || '#',
           },
           {
             '@type': 'HowToStep',
@@ -199,9 +205,8 @@ const SetupPageSchema = () => {
           },
         ],
       },
-      // ---------------------------------------------------------
-      // FAQ — matches visible FAQ on setup/page.tsx
-      // ---------------------------------------------------------
+
+      // FAQ SCHEMA
       {
         '@type': 'FAQPage',
         '@id': `${PAGE_URL}/#faq`,
@@ -272,9 +277,8 @@ const SetupPageSchema = () => {
           },
         ],
       },
-      // ---------------------------------------------------------
-      // BREADCRUMB
-      // ---------------------------------------------------------
+
+      // BREADCRUMBS
       {
         '@type': 'BreadcrumbList',
         '@id': `${PAGE_URL}/#breadcrumb`,
@@ -307,7 +311,7 @@ const SetupPageSchema = () => {
 };
 
 // ---------------------------------------------------------------------------
-// SETUP LAYOUT
+// RESPONSIVE SETUP LAYOUT
 // ---------------------------------------------------------------------------
 export default function SetupLayout({
   children,
@@ -315,9 +319,9 @@ export default function SetupLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="w-full overflow-x-hidden min-h-screen flex flex-col bg-[#0a0a0c] text-[#FFFFFF]">
       <SetupPageSchema />
-      {children}
-    </>
+      <main className="flex-grow w-full">{children}</main>
+    </div>
   );
 }

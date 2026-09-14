@@ -2,14 +2,14 @@
 import type { Metadata } from 'next';
 import { CONSTANTS } from '@/lib/seo';
 
-// ✅ MATCHES seo.ts — SITE_URL already includes https://
+// SEO CONSTANTS
 const SITE_URL = CONSTANTS.SITE_URL;
 const BRAND = CONSTANTS.BRAND_NAME;
 const YEAR = new Date().getFullYear();
 const PAGE_URL = `${SITE_URL}/reseller`;
 
 // ---------------------------------------------------------------------------
-// SEO SAFETY HELPERS
+// SEO SAFETY HELPERS — enforce char limits
 // ---------------------------------------------------------------------------
 const clampTitle = (s: string, max = 60): string =>
   s.length <= max ? s : s.slice(0, max - 1).trimEnd() + '…';
@@ -29,7 +29,7 @@ const PAGE_DESCRIPTION = clampDescription(
 );
 
 // ---------------------------------------------------------------------------
-// METADATA
+// METADATA CONFIGURATION
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -100,22 +100,21 @@ export const metadata: Metadata = {
 };
 
 // ---------------------------------------------------------------------------
-// JSON-LD SCHEMAS
+// JSON-LD SCHEMAS — WebPage + Service + Product + FAQ + Breadcrumbs
 // ---------------------------------------------------------------------------
 const ResellerSchema = () => {
+  const currentDate = new Date().toISOString().split('T')[0];
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
-      // ---------------------------------------------------------
       // WEBPAGE
-      // ---------------------------------------------------------
       {
         '@type': 'WebPage',
         '@id': `${PAGE_URL}/#webpage`,
         url: PAGE_URL,
         name: `IPTV Reseller Program Canada | ${BRAND}`,
         description: PAGE_DESCRIPTION,
-        // ✅ FIXED: LANG → LANGUAGE
         inLanguage: CONSTANTS.LANGUAGE,
         isPartOf: { '@id': `${SITE_URL}/#website` },
         about: { '@id': `${SITE_URL}/#organization` },
@@ -123,9 +122,7 @@ const ResellerSchema = () => {
         primaryImageOfPage: { '@id': `${PAGE_URL}/#primaryimage` },
       },
 
-      // ---------------------------------------------------------
       // PRIMARY IMAGE
-      // ---------------------------------------------------------
       {
         '@type': 'ImageObject',
         '@id': `${PAGE_URL}/#primaryimage`,
@@ -136,9 +133,7 @@ const ResellerSchema = () => {
         caption: `${BRAND} IPTV Reseller Program Canada ${YEAR}`,
       },
 
-      // ---------------------------------------------------------
       // BREADCRUMB
-      // ---------------------------------------------------------
       {
         '@type': 'BreadcrumbList',
         '@id': `${PAGE_URL}/#breadcrumb`,
@@ -153,9 +148,7 @@ const ResellerSchema = () => {
         ],
       },
 
-      // ---------------------------------------------------------
-      // SERVICE — semantically correct for B2B offering
-      // ---------------------------------------------------------
+      // SERVICE — B2B Offering
       {
         '@type': 'Service',
         '@id': `${PAGE_URL}/#service`,
@@ -175,7 +168,7 @@ const ResellerSchema = () => {
             priceCurrency: 'USD',
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
-            validFrom: new Date().toISOString().split('T')[0],
+            validFrom: currentDate,
             description:
               '10 reseller credits, full panel access, 24/7 WhatsApp support. Credits never expire.',
           },
@@ -186,7 +179,7 @@ const ResellerSchema = () => {
             priceCurrency: 'USD',
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
-            validFrom: new Date().toISOString().split('T')[0],
+            validFrom: currentDate,
             description:
               '20 reseller credits, priority support, API access, credits never expire.',
           },
@@ -197,25 +190,21 @@ const ResellerSchema = () => {
             priceCurrency: 'USD',
             availability: 'https://schema.org/InStock',
             url: PAGE_URL,
-            validFrom: new Date().toISOString().split('T')[0],
+            validFrom: currentDate,
             description:
               '30 reseller credits, dedicated support, white label option, full API access.',
           },
         ],
       },
 
-      // ---------------------------------------------------------
-      // PRODUCT + AGGREGATEOFFER — enables rich results
-      // ---------------------------------------------------------
+      // PRODUCT + AGGREGATEOFFER
       {
         '@type': 'Product',
         '@id': `${PAGE_URL}/#product`,
         name: `IPTV Reseller Program Canada`,
         description: `Wholesale IPTV reseller credits for Canada. Buy in bulk, resell at your own price.`,
         brand: {
-          '@type': 'Brand',
-          '@id': `${SITE_URL}/#brand`,
-          name: BRAND,
+          '@id': `${SITE_URL}/#organization`,
         },
         category: 'Business Service',
         offers: {
@@ -229,9 +218,7 @@ const ResellerSchema = () => {
         },
       },
 
-      // ---------------------------------------------------------
-      // FAQ
-      // ---------------------------------------------------------
+      // FAQ SECTION
       {
         '@type': 'FAQPage',
         '@id': `${PAGE_URL}/#faq`,
@@ -292,7 +279,7 @@ const ResellerSchema = () => {
 };
 
 // ---------------------------------------------------------------------------
-// RESELLER LAYOUT
+// RESPONSIVE RESELLER LAYOUT
 // ---------------------------------------------------------------------------
 export default function ResellerLayout({
   children,
@@ -300,9 +287,9 @@ export default function ResellerLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="w-full overflow-x-hidden min-h-screen flex flex-col bg-[#0a0a0c] text-[#FFFFFF]">
       <ResellerSchema />
-      {children}
-    </>
+      <main className="flex-grow w-full">{children}</main>
+    </div>
   );
 }
